@@ -15,6 +15,8 @@ from time import sleep
 
 # groups
 
+# sudo raspi-config
+
 
 if __name__ == "__main__":
 
