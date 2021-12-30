@@ -17,11 +17,11 @@ if __name__ == "__main__":
     
     while True:
 
-        print('\n\n64 - M1 Forward')
-        roboclaw.ForwardM1(address,64)
-        sleep(0.5)
-        print('\n\n0 - M1 Forward')
-        roboclaw.ForwardM1(address, 0)
+        # print('\n\n64 - M1 Forward')
+        # roboclaw.ForwardM1(address,64)
+        # sleep(0.5)
+        # print('\n\n0 - M1 Forward')
+        # roboclaw.ForwardM1(address, 0)
 
         roboclaw.ReadVersion(address)
 
@@ -29,7 +29,10 @@ if __name__ == "__main__":
         print(roboclaw.ReadEncM1(address))
         roboclaw.SetEncM1(address, 6000)
         print(roboclaw.ReadEncM1(address))
-        roboclaw.SpeedAccelDeccelPositionM1(address,10000,2000,10000,15000,1)
+        roboclaw.SetM1PositionPID(addres)
+        print(roboclaw.ReadEncM1(address))
+
+        
 
         # print('64 - M1 Forward')
         # roboclaw.ForwardM1(address,64)
