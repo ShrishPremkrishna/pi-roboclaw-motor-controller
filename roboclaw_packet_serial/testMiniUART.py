@@ -5,7 +5,7 @@ import serial
 # sudo chmod 666 /dev/serial0
 
 serialport = serial.Serial("/dev/serial0", baudrate=9600, timeout=3.0)
-print (print(ser.name))
+print(serialport.name)
 while True:
     serialport.write('rnSay something:'.encode('utf-8'))
     rcv = serialport.read(10)
