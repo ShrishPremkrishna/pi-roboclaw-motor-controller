@@ -10,7 +10,7 @@ from time import sleep
 if __name__ == "__main__":
     
     address = 0x80
-    roboclaw = Roboclaw("/dev/ttyS0", 38400)
+    roboclaw = Roboclaw("/dev/serial0", 38400)
     result = roboclaw.Open()
     if result == 0:
         print('Unable to open port')
@@ -25,12 +25,12 @@ if __name__ == "__main__":
 
         roboclaw.ReadVersion(address)
 
-        roboclaw.ResetEncoders(address)
-        print(roboclaw.ReadEncM1(address))
-        roboclaw.SetEncM1(address, 6000)
-        print(roboclaw.ReadEncM1(address))
-        roboclaw.SetM1PositionPID(addres)
-        print(roboclaw.ReadEncM1(address))
+        # roboclaw.ResetEncoders(address)
+        # print(roboclaw.ReadEncM1(address))
+        # roboclaw.SetEncM1(address, 6000)
+        # print(roboclaw.ReadEncM1(address))
+        # roboclaw.SetM1PositionPID(addres)
+        # print(roboclaw.ReadEncM1(address))
 
         
 
