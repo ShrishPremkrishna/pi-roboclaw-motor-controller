@@ -8,5 +8,5 @@ serialport = serial.Serial("/dev/serial0", baudrate=9600, timeout=3.0)
 print ('latest')
 while True:
     serialport.write(str.encode('rnSay something:'))
-    rcv = serialport.read(10)
+    rcv = port.read(10)
     serialport.write(str.encode('rnYou sent:' + repr(rcv)))
