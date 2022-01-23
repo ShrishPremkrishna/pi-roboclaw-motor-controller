@@ -19,7 +19,9 @@ servo = Servo(16, pin_factory=factory)
 
 if __name__ == "__main__":
     
-    address = 0x80
+    address128 = 0x80
+    address129 = 0x81
+    address130 = 0x82
     roboclaw = Roboclaw("/dev/serial0", 38400)
     result = roboclaw.Open()
     if result == 0:
@@ -32,23 +34,23 @@ class MyController(Controller):
     
     #going forward with triangle press for M1
     def on_triangle_press(self):
-        print('64 - M1 Forward')
-        roboclaw.ForwardM1(address,80)
+        print('Linear Slide Up')
+        roboclaw.ForwardM1(address130,64)
 
     #STOP going forward with triangle press for M1
     def on_triangle_release(self):
-        print('0 - M1 Forward')
-        roboclaw.ForwardM1(address,0)
+        print('Linear Slide Stop')
+        roboclaw.ForwardM1(address130,0)
 
     #going forward with up arrow press for M2
     def on_x_press(self):
-        print('64 - M2 Forward')
-        roboclaw.BackwardM1(address,80)
+        print('Linear Slide Down')
+        roboclaw.BackwardM1(address130,64)
 
     #STOP going forward with up arrow press for M2
     def on_x_release(self):
-        print('0 - M2 Forward')
-        roboclaw.BackwardM1(address,0)
+        print('Linear Slide Stop')
+        roboclaw.BackwardM1(address130,0)
 
     #Servo to max
     def on_square_press(self):
