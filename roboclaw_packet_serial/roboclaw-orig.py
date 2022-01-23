@@ -121,37 +121,26 @@ class Roboclaw:
 		return
 
 	def _sendcommand(self,address,command):
-		print("*** Send Command *** START")
 		self.crc_clear()
-		print("Clear self._crc", self._crc)
 		self.crc_update(address)
-		print("Update address to self._crc", address, self._crc)
-		result = self._port.write(bytes([address]))
-		print("##Serial Writing Address", address, result)
+		self._port.write(chr(address))
 		self.crc_update(command)
-		print("Update command to self._crc", command, self._crc)
-		result = self._port.write(bytes([command]))
-		print("##Serial Writing Command", command, result)
-		print("*** Send Command *** END")
+		self._port.write(chr(command))
 		return
 
 	def _readchecksumword(self):
 		data = self._port.read(2)
 		if len(data)==2:
-			crc = (ord(chr(data[0]))<<8) | ord(chr(data[1]))
+			crc = (ord(data[0])<<8) | ord(data[1])
 			return (1,crc)	
 		return (0,0)
 		
 	def _readbyte(self):
-		print("*** _readbyte *** START")
 		data = self._port.read(1)
-		print("##Serial Reading", data)
 		if len(data):
 			val = ord(data)
 			self.crc_update(val)
-			print("*** _readbyte *** END Pass")	
-			return (1,val)
-		print("*** _readbyte *** END Fail")
+			return (1,val)	
 		return (0,0)
 		
 	def _readword(self):
@@ -183,22 +172,15 @@ class Roboclaw:
 		return (0,0)
 
 	def _writebyte(self,val):
-		print("*** _writebyte *** START")
 		self.crc_update(val&0xFF)
-		print("Update val to self._crc", val&0xFF)
-		
-		result = self._port.write(bytes([val&0xFF]))
-		print("##Serial writing", val&0xFF, result)
-		print("*** _writebyte *** END")
+		self._port.write(chr(val&0xFF))
 
 	def _writesbyte(self,val):
 		self._writebyte(val)
 
 	def _writeword(self,val):
-		print("*** _writeword *** START")
 		self._writebyte((val>>8)&0xFF)
 		self._writebyte(val&0xFF)
-		print("*** _writeword *** END")
 		
 	def _writesword(self,val):
 		self._writeword(val)
@@ -307,14 +289,11 @@ class Roboclaw:
 		return (0,0,0,0,0)
 
 	def _writechecksum(self):
-		print("*** writechecksum *** START")
 		self._writeword(self._crc&0xFFFF)
 		val = self._readbyte()
 		if(len(val)>0):
 			if val[0]:
-				print("*** writechecksum *** END True")
 				return True
-		print("*** writechecksum *** END False")
 		return False
 
 	def _write0(self,address,cmd):
@@ -327,17 +306,13 @@ class Roboclaw:
 		return False
 
 	def _write1(self,address,cmd,val):
-		print("*** write1 *** START")
 		trys=self._trystimeout
 		while trys:
-			print("Trys = ", str(trys))
 			self._sendcommand(address,cmd)
 			self._writebyte(val)
 			if self._writechecksum():
-				print("*** write1 *** END True")
 				return True
 			trys=trys-1
-		print("*** write1 *** END False")
 		return False
 
 	def _write11(self,address,cmd,val1,val2):
@@ -447,7 +422,6 @@ class Roboclaw:
 			self._writelong(val)
 			if self._writechecksum():
 				return True
-			print(str(trys))
 			trys=trys-1
 		return False
 
@@ -666,7 +640,7 @@ class Roboclaw:
 	def SendRandomData(self,cnt):
 		for i in range(0,cnt):
 			byte = random.getrandbits(8)
-			self._port.write(byte)
+			self._port.write(chr(byte))
 		return
 
 	def ForwardM1(self,address,val):
@@ -733,7 +707,6 @@ class Roboclaw:
 			self._sendcommand(address,self.Cmd.GETVERSION)
 			str = ""
 			passed = True
-			print("Trys = ", trys)
 			for i in range(0,48):
 				data = self._port.read(1)
 				if len(data):
@@ -741,11 +714,10 @@ class Roboclaw:
 					self.crc_update(val)
 					if(val==0):
 						break
-					str+=bytes([data[0]]).decode('utf-8')
+					str+=data[0]
 				else:
 					passed = False
 					break
-			print("Is passed = ", passed, str)
 			if passed:
 				crc = self._readchecksumword()
 				if crc[0]:
@@ -1058,8 +1030,6 @@ class Roboclaw:
 	def Open(self):
 		try:
 			self._port = serial.Serial(port=self.comport, baudrate=self.rate, timeout=1, interCharTimeout=self.timeout)
-		except BaseException as ex:
-			print(ex)
+		except:
 			return 0
 		return 1
-
