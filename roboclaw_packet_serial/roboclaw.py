@@ -1,5 +1,5 @@
 import random
-import serial3
+import serial
 import struct
 import time
 
