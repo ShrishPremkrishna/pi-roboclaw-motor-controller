@@ -9,5 +9,6 @@ print ('latest')
 while True:
     serialport.write(str.encode('rnSay something:'))
     serialport.write(bytes([10]))
-    rcv = port.read(10)
+    rcv = serialport.read(10)
+    print('rcv' + rcv);
     serialport.write(str.encode('rnYou sent:' + repr(rcv)))
