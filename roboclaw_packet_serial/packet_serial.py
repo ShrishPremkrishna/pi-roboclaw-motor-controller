@@ -23,7 +23,8 @@ if __name__ == "__main__":
         # print('\n\n0 - M1 Forward')
         # roboclaw.ForwardM1(address, 0)
 
-        roboclaw.ReadVersion(address)
+        version = roboclaw.ReadVersion(address)
+        print(version)
 
         # roboclaw.ResetEncoders(address)
         # print(roboclaw.ReadEncM1(address))
