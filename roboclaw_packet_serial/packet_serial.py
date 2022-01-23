@@ -24,6 +24,7 @@ if __name__ == "__main__":
         # roboclaw.ForwardM1(address, 0)
 
         version = roboclaw.ReadVersion(address)
+        print("Roboclaw Version")
         print(version)
 
         # roboclaw.ResetEncoders(address)
