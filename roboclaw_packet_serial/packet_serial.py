@@ -14,7 +14,7 @@ if __name__ == "__main__":
     result = roboclaw.Open()
     if result == 0:
         print('Unable to open port')
-    print('Printing connection result' + str(result))
+    print('Printing connection result - ' + str(result))
     
     while True:
 
