@@ -1,1 +1,3 @@
 *.pyc
+**/__pycache__/*
+roboclaw_packet_serial/__pycache__/roboclaw.cpython-39.pyc
