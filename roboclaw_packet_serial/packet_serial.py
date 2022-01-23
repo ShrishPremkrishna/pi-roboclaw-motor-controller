@@ -29,12 +29,12 @@ if __name__ == "__main__":
         print("Roboclaw Version")
         print(version)
 
-        # roboclaw.ResetEncoders(address)
-        # print(roboclaw.ReadEncM1(address))
-        # roboclaw.SetEncM1(address, 6000)
-        # print(roboclaw.ReadEncM1(address))
-        # roboclaw.SetM1PositionPID(addres)
-        # print(roboclaw.ReadEncM1(address))
+        roboclaw.ResetEncoders(address)
+        print(roboclaw.ReadEncM1(address))
+        roboclaw.SetEncM1(address, 6000)
+        print(roboclaw.ReadEncM1(address))
+        roboclaw.SetM1PositionPID(addres)
+        print(roboclaw.ReadEncM1(address))
 
         
 
