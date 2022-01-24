@@ -24,7 +24,6 @@ class MyController(Controller):
     def on_x_press(self):
         print('Bar Lift Down')
         servoBarLift.min()
-        servoBarLift.detach()
 
     #
     def on_square_press(self):
@@ -35,7 +34,16 @@ class MyController(Controller):
     def on_circle_press(self):
         print('Gripper Close')
         servoGripper.value = -0.5
-        servoGripper.detach()
+
+    #
+    def on_up_arrow_press(self):
+        print("detach barlift")
+        servoBarLift.value = None
+
+    #
+    def on_left_arrow_press(self):
+        print("detach gripper")
+        servoGripper.value = None
 
 
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
