@@ -15,7 +15,7 @@ while True:
     print("0")
     sleep(1)
 
-    servo.value = 0.75
+    servo.value = 0.5
     print ("0.75")
     sleep(1)
 
