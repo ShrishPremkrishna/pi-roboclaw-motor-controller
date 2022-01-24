@@ -19,6 +19,6 @@ while True:
     # print ("0.75")
     # sleep(1)
 
-    servo.detach()
+    servo.value = None
     break
 
