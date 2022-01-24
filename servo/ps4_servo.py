@@ -7,7 +7,7 @@ from pyPS4Controller.controller import Controller
 
 factory = PiGPIOFactory()
 
-servoBarLift = Servo(17, pin_factory=factory, max = 0.8)
+servoBarLift = Servo(17, pin_factory=factory)
 servoGripper = Servo(22, pin_factory=factory)
 
 
@@ -19,7 +19,7 @@ class MyController(Controller):
     #
     def on_triangle_press(self):
         print('Bar Lift Up')
-        servoBarLift.max()
+        servoBarLift.value = 0.8
 
     #
     def on_x_press(self):
