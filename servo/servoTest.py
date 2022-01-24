@@ -7,12 +7,17 @@ factory = PiGPIOFactory()
 servo = Servo(17, pin_factory=factory)
 
 while True:
-    servo.value = -1
+    servo.value = -0.75
+    print("0.75")
     sleep(1)
-    # servo.value = 0
+
+    servo.value = 0
+    print("0")
     sleep(1)
-    servo.value = 1
-    sleep(4)
+
+    servo.value = 0.75
+    print ("0.75")
+    sleep(1)
 
     servo.detach()
     break
