@@ -11,7 +11,7 @@ while True:
     sleep(1)
     # servo.value = 0
     sleep(1)
-    servo.value = 20
+    servo.value = 1
     sleep(4)
 
     servo.detach()
