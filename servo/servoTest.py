@@ -13,7 +13,7 @@ while True:
 
     servo.value = 0
     print("0")
-    sleep(1)
+    sleep(5)
 
     # servo.value = 0.5
     # print ("0.75")
