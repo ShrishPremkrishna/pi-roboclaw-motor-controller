@@ -4,26 +4,15 @@ from time import sleep
 
 factory = PiGPIOFactory()
 
-servo = Servo(17, pin_factory=factory)
+servoBarLift = Servo(17, pin_factory=factory)
+#servoGripper = Servo()
 
 while True:
-    # servo.value = -0.75
-    # print("0.75")
-    # sleep(1)
 
-    servo.value = 0.8
-    print("0.75")
-    sleep(5)
+    servoBarLift.min()
+    print("min")
+    sleep(2)
 
-    servo.value = -1
-    print("-0.75")
-    sleep(1)
-    
+    servoBarLift.detach()
 
-    # servo.value = 0.5
-    # print ("0.75")
-    # sleep(1)
-
-    servo.value = None
-    break
 
