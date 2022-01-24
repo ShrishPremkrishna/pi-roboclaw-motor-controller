@@ -2,7 +2,6 @@ from gpiozero import Servo
 from gpiozero.pins.pigpio import PiGPIOFactory
 from time import sleep
 
-from roboclaw import Roboclaw
 from pyPS4Controller.controller import Controller
 
 factory = PiGPIOFactory()
@@ -35,13 +34,6 @@ class MyController(Controller):
     def on_circle_press(self):
         print('Gripper Close')
         servoGripper.value = -0.5
-
-
-servoBarLift.min()
-print("min")
-sleep(2)
-
-servoBarLift.detach()
 
 
 
