@@ -50,13 +50,13 @@ class MyController(Controller):
         print('Linear Slide Up')
         roboclaw.ForwardM1(address130, 64)
 
-    def on_up_down_arrow_release(self):
-        print('Linear Slide Stop')
-        roboclaw.ForwardM1(address130, 0)
-
     def on_down_arrow_press(self):
         print('Linear Slide Down')
         roboclaw.BackwardM1(address130, 64)
+
+    def on_up_down_arrow_release(self):
+        print('Linear Slide Stop')
+        roboclaw.ForwardM1(address130, 0)
 
     # Chassis controls
     def on_R3_up(self):
