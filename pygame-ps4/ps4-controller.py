@@ -1,6 +1,6 @@
 import pygame
 
-pygame.init()
+# pygame.init()
 
 # Loop until the user clicks the close button.
 done = False
