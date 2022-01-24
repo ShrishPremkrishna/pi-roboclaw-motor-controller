@@ -14,5 +14,6 @@ while True:
     sleep(2)
 
     servoBarLift.detach()
+    break
 
 
