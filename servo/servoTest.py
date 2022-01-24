@@ -5,7 +5,7 @@ from time import sleep
 factory = PiGPIOFactory()
 
 servoBarLift = Servo(17, pin_factory=factory)
-#servoGripper = Servo()
+servoGripper = Servo(22, pin_factory=factory)
 
 while True:
 
