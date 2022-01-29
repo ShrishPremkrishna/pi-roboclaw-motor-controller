@@ -63,7 +63,6 @@ class MyController(Controller):
         print('Move forward' + str(arg))
         # TODO
 
-
     def on_R3_down(self, arg):
         print('Move backward' + str(arg))
         # TODO
