@@ -103,6 +103,13 @@ class MyController(Controller):
         roboclaw.ForwardM1(address129, 0)
         roboclaw.ForwardM2(address129, 0)
 
+    def on_R3_x_at_rest(self):
+        roboclaw.ForwardM1(address128, 0)
+        roboclaw.ForwardM2(address128, 0)
+        roboclaw.ForwardM1(address129, 0)
+        roboclaw.ForwardM2(address129, 0)
+
+
 
 
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
