@@ -60,20 +60,20 @@ class MyController(Controller):
 
     # Chassis controls
     def on_R3_up(self, arg):
-        print('Move forward')
+        print('Move forward' + str(arg))
         # TODO
 
 
-    def on_R3_down(self):
-        print('Move backward')
+    def on_R3_down(self, arg):
+        print('Move backward' + str(arg))
         # TODO
 
-    def on_L3_left(self):
-        print('Move left')
+    def on_R3_left(self, arg):
+        print('Move left' + str(arg))
         # TODO
 
-    def on_L3_right(self):
-        print('Move right')
+    def on_R3_right(self, arg):
+        print('Move right' + str(arg))
         # TODO
 
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
