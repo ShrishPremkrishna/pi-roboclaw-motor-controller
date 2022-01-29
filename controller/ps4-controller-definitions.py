@@ -59,7 +59,7 @@ class MyController(Controller):
         roboclaw.ForwardM1(address130, 0)
 
     # Chassis controls
-    def on_R3_up(self):
+    def on_R3_up(self, arg):
         print('Move forward')
         # TODO
 
