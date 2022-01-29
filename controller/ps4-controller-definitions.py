@@ -63,15 +63,16 @@ class MyController(Controller):
         print('Move forward')
         # TODO
 
+
     def on_R3_down(self):
         print('Move backward')
         # TODO
 
-    def on_R3_left(self):
+    def on_L3_left(self):
         print('Move left')
         # TODO
 
-    def on_R3_right(self):
+    def on_L3_right(self):
         print('Move right')
         # TODO
 
