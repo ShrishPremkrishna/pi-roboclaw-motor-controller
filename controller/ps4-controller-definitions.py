@@ -12,6 +12,11 @@ address128 = 0x80
 address129 = 0x81
 address130 = 0x82
 
+# mecanum logic
+axis1_UD_R3 = 0
+axis2_LR_R3 = 0
+axis3_LR_L3 = 0
+
 roboclaw = Roboclaw("/dev/serial0", 38400)
 result = roboclaw.Open()
 if result == 0:
@@ -62,6 +67,10 @@ class MyController(Controller):
     def on_R3_up(self, arg):
         print('Move forward' + str(arg))
         # TODO
+        roboclaw.ForwardM1(address128, 20)
+        roboclaw.ForwardM2(address128, 20)
+        roboclaw.ForwardM1(address129, 20)
+        roboclaw.ForwardM2(address129, 20)
 
     def on_R3_down(self, arg):
         print('Move backward' + str(arg))
