@@ -83,10 +83,18 @@ class MyController(Controller):
     def on_R3_left(self, arg):
         print('Move left' + str(arg))
         # TODO
+        roboclaw.ForwardM1(address128, 20)
+        roboclaw.ForwardM2(address128, 20)
+        roboclaw.ForwardM1(address129, 20)
+        roboclaw.ForwardM2(address129, 20)
 
     def on_R3_right(self, arg):
         print('Move right' + str(arg))
         # TODO
+        roboclaw.ForwardM1(address128, 20)
+        roboclaw.ForwardM2(address128, 5)
+        roboclaw.ForwardM1(address129, 20)
+        roboclaw.ForwardM2(address129, 5)
 
     #motor kill
     def on_R3_y_at_rest(self):
@@ -95,17 +103,7 @@ class MyController(Controller):
         roboclaw.ForwardM1(address129, 0)
         roboclaw.ForwardM2(address129, 0)
 
-    def on_R3_x_at_rest(self):
-        roboclaw.ForwardM1(address128, 0)
-        roboclaw.ForwardM2(address128, 0)
-        roboclaw.ForwardM1(address129, 0)
-        roboclaw.ForwardM2(address129, 0)
 
-    def on_share_press(self):
-        roboclaw.ForwardM1(address128, 0)
-        roboclaw.ForwardM2(address128, 0)
-        roboclaw.ForwardM1(address129, 0)
-        roboclaw.ForwardM2(address129, 0)
 
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
 # you can start listening before controller is paired, as long as you pair it within the timeout window
