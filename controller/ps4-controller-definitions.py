@@ -3,6 +3,9 @@ from roboclaw import Roboclaw
 from pyPS4Controller.controller import Controller
 from gpiozero import Servo
 from gpiozero.pins.pigpio import PiGPIOFactory
+from picamera import PiCamera
+
+camera = PiCamera()
 
 factory = PiGPIOFactory()
 
@@ -16,11 +19,19 @@ address130 = 0x82
 axis1_UD_R3 = 0
 axis2_LR_R3 = 0
 axis3_LR_L3 = 0
+still_running = true
 
 roboclaw = Roboclaw("/dev/serial0", 38400)
 result = roboclaw.Open()
 if result == 0:
     print('Unable to open port')
+
+#mecanum code?
+while still_running==True:
+    roboclaw.ForwardBackwardM1(address129, (axis1_UD_R3 - axis3_LR_L3 - axis2_LR_R3))
+    roboclaw.ForwardBackwardM2(address129, (axis1_UD_R3 - axis3_LR_L3 + axis2_LR_R3))
+    roboclaw.ForwardBackwardM1(address128, (axis1_UD_R3 + axis3_LR_L3 + axis2_LR_R3))
+    roboclaw.ForwardBackwardM2(address128, (axis1_UD_R3 + axis3_LR_L3 - axis2_LR_R3))
 
 class MyController(Controller):
 
@@ -45,6 +56,7 @@ class MyController(Controller):
         print('Gripper Close')
         servoGripper.value = -0.5
 
+    #detach gripper and barlift
     def on_options_press(self):
         print("detach barlift and gripper")
         servoBarLift.value = None
@@ -59,6 +71,7 @@ class MyController(Controller):
         print('Linear Slide Down')
         roboclaw.BackwardM1(address130, 64)
 
+        # Stop slide
     def on_up_down_arrow_release(self):
         print('Linear Slide Stop')
         roboclaw.ForwardM1(address130, 0)
@@ -67,34 +80,32 @@ class MyController(Controller):
     def on_R3_up(self, arg):
         print('Move forward' + str(arg))
         # TODO
-        roboclaw.BackwardM1(address128, 20)
-        roboclaw.BackwardM2(address128, 20)
-        roboclaw.BackwardM1(address129, 20)
-        roboclaw.BackwardM2(address129, 20)
+        axis1_UD_R3 = arg
 
     def on_R3_down(self, arg):
         print('Move backward' + str(arg))
         # TODO
-        roboclaw.ForwardM1(address128, 20)
-        roboclaw.ForwardM2(address128, 20)
-        roboclaw.ForwardM1(address129, 20)
-        roboclaw.ForwardM2(address129, 20)
+        axis1_UD_R3 = arg
 
     def on_R3_left(self, arg):
         print('Move left' + str(arg))
         # TODO
-        roboclaw.ForwardM1(address128, 20)
-        roboclaw.ForwardM2(address128, 20)
-        roboclaw.ForwardM1(address129, 20)
-        roboclaw.ForwardM2(address129, 20)
+        axis2_LR_R3 = arg
 
     def on_R3_right(self, arg):
         print('Move right' + str(arg))
         # TODO
-        roboclaw.ForwardM1(address128, 20)
-        roboclaw.ForwardM2(address128, 5)
-        roboclaw.ForwardM1(address129, 20)
-        roboclaw.ForwardM2(address129, 5)
+        axis2_LR_R3 = arg
+
+    def on_L3_right(self, arg):
+        print('Rotate right' + str(arg))
+        #TODO
+        axis3_LR_L3 = arg
+
+    def on_L3_left(self, arg):
+        print('Rotate left' + str(arg))
+        #TODO
+        axis3_LR_L3 = arg
 
     #motor kill
     def on_R3_y_at_rest(self):
@@ -109,7 +120,7 @@ class MyController(Controller):
         roboclaw.ForwardM1(address129, 0)
         roboclaw.ForwardM2(address129, 0)
 
-
+    #
 
 
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
