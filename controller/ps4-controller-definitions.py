@@ -51,11 +51,11 @@ class MyController(Controller):
         #Gripper Open
     def on_square_press(self):
         print('Gripper Open')
-        servoGripper.value = 0.5
+        servoGripper.value = 1
         #Gripper Close
     def on_circle_press(self):
         print('Gripper Close')
-        servoGripper.value = -0.5
+        servoGripper.value = -1
 
     #detach gripper and barlift
     def on_options_press(self):
