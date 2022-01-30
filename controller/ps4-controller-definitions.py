@@ -4,10 +4,10 @@ from roboclaw import Roboclaw
 from pyPS4Controller.controller import Controller
 from gpiozero import Servo
 from gpiozero.pins.pigpio import PiGPIOFactory
-from picamera import PiCamera
+# from picamera import PiCamera
 
 #Defining PiCamera
-camera = PiCamera()
+# camera = PiCamera()
 
 #PiGpio for servos to reduce flutter
 factory = PiGPIOFactory()
@@ -85,11 +85,11 @@ class MyController(Controller):
         #Move forward
     def on_R3_up(self, arg):
         print('Move forward' + str(arg))
-        # TODO
         roboclaw.ForwardM1(address129, 20)
         roboclaw.ForwardM2(address129, 20)
         roboclaw.ForwardM1(address128, 20)
         roboclaw.ForwardM2(address128, 20)
+
         #Move backward
     def on_R3_down(self, arg):
         print('Move backward' + str(arg))
@@ -98,6 +98,7 @@ class MyController(Controller):
         roboclaw.BackwardM2(address129, 20)
         roboclaw.BackwardM1(address128, 20)
         roboclaw.BackwardM2(address128, 20)
+        
         #Move Left
     def on_R3_left(self, arg):
         print('Move left' + str(arg))
@@ -106,6 +107,7 @@ class MyController(Controller):
         roboclaw.ForwardM2(address129, 20)
         roboclaw.ForwardM1(address128, 20)
         roboclaw.BackwardM2(address128, 20)
+        
         #Move Right
     def on_R3_right(self, arg):
         print('Move right' + str(arg))
@@ -128,10 +130,21 @@ class MyController(Controller):
         roboclaw.ForwardM2(address128, 0)
         roboclaw.ForwardM1(address129, 0)
         roboclaw.ForwardM2(address129, 0)
+    def on_share_press(self):
+        roboclaw.ForwardM1(address128, 0)
+        roboclaw.ForwardM2(address128, 0)
+        roboclaw.ForwardM1(address129, 0)
+        roboclaw.ForwardM2(address129, 0)
 
 
     # def on_playstation_button_press(self):
-    #     #take pic with camera
+    #     camera.capture()
+
+    # def on_R1_press(self):
+    #     camera.start_preview()
+    # def on_R1_release(self):
+    #     camera.stop_preview()
+
 
 
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
