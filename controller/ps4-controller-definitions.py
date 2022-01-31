@@ -41,7 +41,7 @@ class MyController(Controller):
         #Bar lift Up
     def on_triangle_press(self):
         print('Bar Lift Up')
-        servoBarLift.value = 0.8
+        servoBarLift.value = 0.6
         #Bar lift Down
     def on_x_press(self):
         print('Bar Lift Down')
