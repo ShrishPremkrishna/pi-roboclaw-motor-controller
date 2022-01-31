@@ -8,14 +8,14 @@ servoBarLift = Servo(22, pin_factory=factory)
 servoGripper = Servo(17, pin_factory=factory)
 
 
-servoBarLift.value = -0.7
+servoBarLift.value = -1
 sleep(3)
 servoBarLift.value = 0
 sleep(2)
-servoBarLift.value = 0.7
+servoBarLift.value = 0.8
 sleep(3)
 servoBarLift.value = 0
-sleep(7)
+sleep(2)
 
 
 servoBarLift.detach()
