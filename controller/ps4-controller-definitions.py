@@ -60,6 +60,7 @@ class MyController(Controller):
     #detach gripper and barlift
     def on_options_press(self):
         print("detach barlift and gripper")
+        servoBarLift.value = -0.8
         servoBarLift.value = None
         servoGripper.value = None
 
