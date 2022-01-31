@@ -51,11 +51,11 @@ class MyController(Controller):
         #Gripper Open
     def on_square_press(self):
         print('Gripper Open')
-        servoGripper.value = 0.5
+        servoGripper.value = 1
         #Gripper Close
     def on_circle_press(self):
         print('Gripper Close')
-        servoGripper.value = -0.5
+        servoGripper.value = -1
 
     #detach gripper and barlift
     def on_options_press(self):
@@ -83,7 +83,7 @@ class MyController(Controller):
 
     # Chassis controls
         #Move forward
-    def on_R3_up(self, arg):
+    def on_R3_down(self, arg):
         print('Move forward' + str(arg))
         roboclaw.ForwardM1(address129, 20)
         roboclaw.ForwardM2(address129, 20)
@@ -91,7 +91,7 @@ class MyController(Controller):
         roboclaw.ForwardM2(address128, 20)
 
         #Move backward
-    def on_R3_down(self, arg):
+    def on_R3_up(self, arg):
         print('Move backward' + str(arg))
         # TODO
         roboclaw.BackwardM1(address129, 20)
@@ -100,7 +100,7 @@ class MyController(Controller):
         roboclaw.BackwardM2(address128, 20)
         
         #Move Left
-    def on_R3_left(self, arg):
+    def on_L3_left(self, arg):
         print('Move left' + str(arg))
         # TODO
         roboclaw.BackwardM1(address129, 20)
@@ -109,7 +109,7 @@ class MyController(Controller):
         roboclaw.BackwardM2(address128, 20)
         
         #Move Right
-    def on_R3_right(self, arg):
+    def on_L3_right(self, arg):
         print('Move right' + str(arg))
         # TODO
         roboclaw.ForwardM1(address129, 20)
@@ -125,7 +125,7 @@ class MyController(Controller):
         roboclaw.ForwardM1(address129, 0)
         roboclaw.ForwardM2(address129, 0)
         #Motor stop at x rest on R3
-    def on_R3_x_at_rest(self):
+    def on_L3_x_at_rest(self):
         roboclaw.ForwardM1(address128, 0)
         roboclaw.ForwardM2(address128, 0)
         roboclaw.ForwardM1(address129, 0)
