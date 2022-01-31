@@ -7,6 +7,13 @@ factory = PiGPIOFactory()
 servoBarLift = Servo(22, pin_factory=factory)
 servoGripper = Servo(17, pin_factory=factory)
 
+
+servoBarLift.value = -0.7
+sleep(3)
+servoBarLift.value = 0
+sleep(2)
+servoBarLift.value = 0.7
+sleep(3)
 servoBarLift.value = 0
 sleep(7)
 
