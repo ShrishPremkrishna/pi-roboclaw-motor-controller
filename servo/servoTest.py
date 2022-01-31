@@ -6,8 +6,8 @@ from time import sleep
 #servoBarLift = Servo(17, pin_factory=factory)
 #servoGripper = Servo(22, pin_factory=factory)
 
-servoBarLift = Servo(1, pin_factory=factory)
-servoGripper = Servo(4, pin_factory=factory)
+servoBarLift = Servo(1)
+servoGripper = Servo(4)
 
 servoBarLift.detach()
 servoGripper.detach()
