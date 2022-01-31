@@ -13,8 +13,8 @@ from gpiozero.pins.pigpio import PiGPIOFactory
 factory = PiGPIOFactory()
 
 #Establishing servos
-servoBarLift = Servo(22, pin_factory=factory, min_pulse_width=553/1000, max_pulse_width=2425/1000)
-servoGripper = Servo(17, pin_factory=factory, min_pulse_width=553/1000, max_pulse_width=2425/1000)
+servoBarLift = Servo(22, pin_factory=factory, min_pulse_width=553/1000000, max_pulse_width=2425/1000000)
+servoGripper = Servo(17, pin_factory=factory, min_pulse_width=553/1000000, max_pulse_width=2425/1000000)
 
 #address' for motors
 address128 = 0x80
