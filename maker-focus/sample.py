@@ -104,5 +104,5 @@ if __name__=='__main__':
       time.sleep(0.02)  
 
  
-
+    self.write(self.__MODE1, newmode)
     break
