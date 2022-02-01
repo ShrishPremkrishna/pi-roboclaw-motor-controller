@@ -5,7 +5,7 @@ address128 = 0x80
 address129 = 0x81
 address130 = 0x82
 
-roboclaw = Roboclaw("/dev/serial0", 38400)
+roboclaw = Roboclaw("/dev/serial0", 38400, timeout=1)
 result = roboclaw.Open()
 if result == 0:
     print('Unable to open port')
