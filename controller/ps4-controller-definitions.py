@@ -10,11 +10,11 @@ from gpiozero.pins.pigpio import PiGPIOFactory
 # camera = PiCamera()
 
 #PiGpio for servos to reduce flutter
-factory = PiGPIOFactory()
+# factory = PiGPIOFactory()
 
-#Establishing servos
-servoBarLift = Servo(22, pin_factory=factory, min_pulse_width=553/1000000, max_pulse_width=2425/1000000)
-servoGripper = Servo(17, pin_factory=factory, min_pulse_width=553/1000000, max_pulse_width=2425/1000000)
+# #Establishing servos
+# servoBarLift = Servo(22, pin_factory=factory, min_pulse_width=553/1000000, max_pulse_width=2425/1000000)
+# servoGripper = Servo(17, pin_factory=factory, min_pulse_width=553/1000000, max_pulse_width=2425/1000000)
 
 #address' for motors
 address128 = 0x80
@@ -37,32 +37,32 @@ class MyController(Controller):
     
 
 
-    # Bar Lift controls
-        #Bar lift Up
-    def on_triangle_press(self):
-        print('Bar Lift Up')
-        servoBarLift.value = 0.5
-        #Bar lift Down
-    def on_x_press(self):
-        print('Bar Lift Down')
-        servoBarLift.value = -0.8
+    # # Bar Lift controls
+    #     #Bar lift Up
+    # def on_triangle_press(self):
+    #     print('Bar Lift Up')
+    #     servoBarLift.value = 0.5
+    #     #Bar lift Down
+    # def on_x_press(self):
+    #     print('Bar Lift Down')
+    #     servoBarLift.value = -0.8
 
-    # Gripper controls
-        #Gripper Open
-    def on_square_press(self):
-        print('Gripper Open')
-        servoGripper.value = 0.6
-        #Gripper Close
-    def on_circle_press(self):
-        print('Gripper Close')
-        servoGripper.value = -1
+    # # Gripper controls
+    #     #Gripper Open
+    # def on_square_press(self):
+    #     print('Gripper Open')
+    #     servoGripper.value = 0.6
+    #     #Gripper Close
+    # def on_circle_press(self):
+    #     print('Gripper Close')
+    #     servoGripper.value = -1
 
-    #detach gripper and barlift
-    def on_options_press(self):
-        print("detach barlift and gripper")
-        servoBarLift.value = -0.8
-        servoBarLift.value = None
-        servoGripper.value = None
+    # #detach gripper and barlift
+    # def on_options_press(self):
+    #     print("detach barlift and gripper")
+    #     servoBarLift.value = -0.8
+    #     servoBarLift.value = None
+    #     servoGripper.value = None
 
 
 
