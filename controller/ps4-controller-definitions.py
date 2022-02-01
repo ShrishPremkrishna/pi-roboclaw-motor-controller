@@ -101,7 +101,7 @@ class MyController(Controller):
         roboclaw.BackwardM2(address128, 20)
         
         #Move Left
-    def on_L3_left(self, arg):
+    def on_R3_left(self, arg):
         print('Move left' + str(arg))
         # TODO
         roboclaw.BackwardM1(address129, 20)
@@ -110,7 +110,7 @@ class MyController(Controller):
         roboclaw.BackwardM2(address128, 20)
         
         #Move Right
-    def on_L3_right(self, arg):
+    def on_R3_right(self, arg):
         print('Move right' + str(arg))
         # TODO
         roboclaw.ForwardM1(address129, 20)
@@ -125,20 +125,14 @@ class MyController(Controller):
         roboclaw.ForwardM2(address128, 0)
         roboclaw.ForwardM1(address129, 0)
         roboclaw.ForwardM2(address129, 0)
-        roboclaw.BackwardM1(address128, 0)
-        roboclaw.BackwardM2(address128, 0)
-        roboclaw.BackwardM1(address129, 0)
-        roboclaw.BackwardM2(address129, 0)      
+     
         #Motor stop at x rest on R3
     def on_R3_x_at_rest(self):
         roboclaw.ForwardM1(address128, 0)
         roboclaw.ForwardM2(address128, 0)
         roboclaw.ForwardM1(address129, 0)
         roboclaw.ForwardM2(address129, 0)
-        roboclaw.BackwardM1(address128, 0)
-        roboclaw.BackwardM2(address128, 0)
-        roboclaw.BackwardM1(address129, 0)
-        roboclaw.BackwardM2(address129, 0)   
+   
     def on_share_press(self):
         roboclaw.ForwardM1(address128, 0)
         roboclaw.ForwardM2(address128, 0)
