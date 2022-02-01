@@ -51,7 +51,7 @@ class MyController(Controller):
         #Gripper Open
     def on_square_press(self):
         print('Gripper Open')
-        servoGripper.value = 1
+        servoGripper.value = 0.6
         #Gripper Close
     def on_circle_press(self):
         print('Gripper Close')
