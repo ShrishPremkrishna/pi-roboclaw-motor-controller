@@ -13,7 +13,7 @@ if result == 0:
 while True:
     roboclaw.ForwardM1(address129, 20)
     roboclaw.ForwardM2(address129, 20)
-    roboclaw.ForwardM1(address128, 20)
-    roboclaw.ForwardM2(address128, 20)
     sleep(5)
+    roboclaw.ForwardM1(address129, 0)
+    roboclaw.ForwardM2(address129, 0)
     break
