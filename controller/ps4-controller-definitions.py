@@ -86,65 +86,69 @@ class MyController(Controller):
         #Move forward
     def on_R3_down(self, arg):
         print('Move forward' + str(arg))
-        roboclaw.ForwardM1(address129, 20)
-        roboclaw.ForwardM2(address129, 20)
-        roboclaw.ForwardM1(address128, 20)
-        roboclaw.ForwardM2(address128, 20)
+        # roboclaw.ForwardM1(address129, 20)
+        # roboclaw.ForwardM2(address129, 20)
+        # roboclaw.ForwardM1(address128, 20)
+        # roboclaw.ForwardM2(address128, 20)
 
         #Move backward
     def on_R3_up(self, arg):
         print('Move backward' + str(arg))
         # TODO
-        roboclaw.BackwardM1(address129, 20)
-        roboclaw.BackwardM2(address129, 20)
-        roboclaw.BackwardM1(address128, 20)
-        roboclaw.BackwardM2(address128, 20)
+        # roboclaw.BackwardM1(address129, 20)
+        # roboclaw.BackwardM2(address129, 20)
+        # roboclaw.BackwardM1(address128, 20)
+        # roboclaw.BackwardM2(address128, 20)
         
         #Move Left
     def on_L3_left(self, arg):
         print('Move left' + str(arg))
         # TODO
-        roboclaw.BackwardM1(address129, 20)
-        roboclaw.ForwardM2(address129, 20)
-        roboclaw.ForwardM1(address128, 20)
-        roboclaw.BackwardM2(address128, 20)
+        # roboclaw.BackwardM1(address129, 20)
+        # roboclaw.ForwardM2(address129, 20)
+        # roboclaw.ForwardM1(address128, 20)
+        # roboclaw.BackwardM2(address128, 20)
         
         #Move Right
     def on_L3_right(self, arg):
         print('Move right' + str(arg))
         # TODO
-        roboclaw.ForwardM1(address129, 20)
-        roboclaw.BackwardM2(address129, 20)
-        roboclaw.BackwardM1(address128, 20)
-        roboclaw.ForwardM2(address128, 20)
+        # roboclaw.ForwardM1(address129, 20)
+        # roboclaw.BackwardM2(address129, 20)
+        # roboclaw.BackwardM1(address128, 20)
+        # roboclaw.ForwardM2(address128, 20)
 
     #motor kill
         #Motor stop at y rest on R3
     def on_R3_y_at_rest(self):
-        roboclaw.ForwardM1(address128, 0)
-        roboclaw.ForwardM2(address128, 0)
-        roboclaw.ForwardM1(address129, 0)
-        roboclaw.ForwardM2(address129, 0)
-        roboclaw.BackwardM1(address128, 0)
-        roboclaw.BackwardM2(address128, 0)
-        roboclaw.BackwardM1(address129, 0)
-        roboclaw.BackwardM2(address129, 0)      
+        print("on_R3_y_at_rest")
+        # roboclaw.ForwardM1(address128, 0)
+        # roboclaw.ForwardM2(address128, 0)
+        # roboclaw.ForwardM1(address129, 0)
+        # roboclaw.ForwardM2(address129, 0)
+        # roboclaw.BackwardM1(address128, 0)
+        # roboclaw.BackwardM2(address128, 0)
+        # roboclaw.BackwardM1(address129, 0)
+        # roboclaw.BackwardM2(address129, 0)      
         #Motor stop at x rest on R3
-    def on_R3_x_at_rest(self):
-        roboclaw.ForwardM1(address128, 0)
-        roboclaw.ForwardM2(address128, 0)
-        roboclaw.ForwardM1(address129, 0)
-        roboclaw.ForwardM2(address129, 0)
-        roboclaw.BackwardM1(address128, 0)
-        roboclaw.BackwardM2(address128, 0)
-        roboclaw.BackwardM1(address129, 0)
-        roboclaw.BackwardM2(address129, 0)   
-        
+
+    def on_L3_x_at_rest(self):
+        print("on_L3_x_at_rest")
+        # roboclaw.ForwardM1(address128, 0)
+        # roboclaw.ForwardM2(address128, 0)
+        # roboclaw.ForwardM1(address129, 0)
+        # roboclaw.ForwardM2(address129, 0)
+        # roboclaw.BackwardM1(address128, 0)
+        # roboclaw.BackwardM2(address128, 0)
+        # roboclaw.BackwardM1(address129, 0)
+        # roboclaw.BackwardM2(address129, 0)   
+
     def on_share_press(self):
-        roboclaw.ForwardM1(address128, 0)
-        roboclaw.ForwardM2(address128, 0)
-        roboclaw.ForwardM1(address129, 0)
-        roboclaw.ForwardM2(address129, 0)
+        print("on_share_press")
+        # roboclaw.ForwardM1(address128, 0)
+        # roboclaw.ForwardM2(address128, 0)
+        # roboclaw.ForwardM1(address129, 0)
+        # roboclaw.ForwardM2(address129, 0)
 
 
     # def on_playstation_button_press(self):
