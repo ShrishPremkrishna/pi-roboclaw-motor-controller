@@ -31,12 +31,14 @@ if __name__ == "__main__":
         roboclaw.SetEncM1(address, 6000)
         print(roboclaw.ReadEncM1(address))
 
-        print('\n\n############64 - M1 Forward')
+        print('\n\n############64 - M1 & M2 Forward')
         roboclaw.ForwardM1(address,64)
+        roboclaw.ForwardM2(address,64)
         sleep(0.5)
 
-        print('\n\n############0 - M1 Forward')
+        print('\n\n############0 - M1 & M2 Forward')
         roboclaw.ForwardM1(address, 0)
+        roboclaw.ForwardM2(address, 0)
 
         # print('64 - M1 Forward')
         # roboclaw.ForwardM1(address,64)
