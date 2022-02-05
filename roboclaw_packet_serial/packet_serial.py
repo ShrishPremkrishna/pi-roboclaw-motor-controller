@@ -9,7 +9,7 @@ from time import sleep
 
 if __name__ == "__main__":
     
-    address = 0x81
+    address = 0x82
     roboclaw = Roboclaw("/dev/serial0", 38400)
     result = roboclaw.Open()
     if result == 0:
@@ -33,12 +33,12 @@ if __name__ == "__main__":
 
         print('\n\n############64 - M1 & M2 Forward')
         roboclaw.ForwardM1(address,64)
-        roboclaw.ForwardM2(address,64)
+        # roboclaw.ForwardM2(address,64)
         sleep(0.5)
 
         print('\n\n############0 - M1 & M2 Forward')
         roboclaw.ForwardM1(address, 0)
-        roboclaw.ForwardM2(address, 0)
+        # roboclaw.ForwardM2(address, 0)
 
         # print('64 - M1 Forward')
         # roboclaw.ForwardM1(address,64)
