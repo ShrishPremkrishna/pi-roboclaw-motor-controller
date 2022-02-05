@@ -31,8 +31,8 @@ if __name__ == "__main__":
     
     while(1):
         
-        run_controller(23, 94)
-        run_controller(23, 180)
+        run_controller(23, 94, None)
+        run_controller(23, 180, None)
         sleep(2)
 
         break
