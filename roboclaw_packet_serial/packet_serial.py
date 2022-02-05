@@ -33,8 +33,6 @@ if __name__ == "__main__":
         print(roboclaw.ReadEncM1(address))
         roboclaw.SetEncM1(address, 6000)
         print(roboclaw.ReadEncM1(address))
-        roboclaw.SetM1PositionPID(address)
-        print(roboclaw.ReadEncM1(address))
 
         
 
