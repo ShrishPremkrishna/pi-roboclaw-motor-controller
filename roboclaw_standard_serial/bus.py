@@ -32,7 +32,6 @@ if __name__ == "__main__":
     while(1):
         
         run_controller(23, 94, 2)
-        sleep(2)
         run_controller(23, 180, 2)
         sleep(2)
 
