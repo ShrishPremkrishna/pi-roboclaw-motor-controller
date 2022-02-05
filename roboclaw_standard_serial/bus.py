@@ -2,7 +2,7 @@ from serial import Serial
 from time import sleep
 import RPi.GPIO as GPIO
 
-test = Serial()
+test = Serial(23,24,25)
 
 def run_controller(pin, speed, run_time):
     
