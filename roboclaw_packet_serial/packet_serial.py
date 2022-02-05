@@ -25,15 +25,17 @@ if __name__ == "__main__":
         print("Roboclaw Version")
         print(version)
 
-        roboclaw.ResetEncoders(address)
-        print(roboclaw.ReadEncM1(address))
+        # roboclaw.ResetEncoders(address)
+        # print(roboclaw.ReadEncM1(address))
+        print('\n\n############Set Encoders')
         roboclaw.SetEncM1(address, 6000)
         print(roboclaw.ReadEncM1(address))
 
-        # print('\n\n64 - M1 Forward')
+        print('\n\n############64 - M1 Forward')
         roboclaw.ForwardM1(address,64)
         sleep(0.5)
-        # print('\n\n0 - M1 Forward')
+
+        print('\n\n############0 - M1 Forward')
         roboclaw.ForwardM1(address, 0)
 
         # print('64 - M1 Forward')
