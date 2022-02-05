@@ -49,7 +49,7 @@ class MyController(Controller):
         roboclaw.BackwardM2(0x81,64)
 
         #Rotate Left
-    def on_R3_left(self, arg):
+    def on_L3_left(self, arg):
         print('R3 left: ' + str(round(arg)))
         roboclaw.ForwardM1(0x80,64)
         roboclaw.BackwardM2(0x80,64)
@@ -57,7 +57,7 @@ class MyController(Controller):
         roboclaw.BackwardM2(0x81,64)
 
         #Rotate right
-    def on_R3_right(self, arg):
+    def on_L3_right(self, arg):
         print('R3 right: ' + str(round(arg)))
         roboclaw.BackwardM1(0x80,64)
         roboclaw.ForwardM2(0x80,64)
