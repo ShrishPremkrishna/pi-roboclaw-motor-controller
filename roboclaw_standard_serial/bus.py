@@ -33,7 +33,7 @@ if __name__ == "__main__":
         
         # run_controller(23, 94, 2)
         # sleep(2)
-        Serial.write(64)
+        serial.write(64)
 
         break
     
