@@ -9,7 +9,7 @@ from time import sleep
 
 if __name__ == "__main__":
     
-    address = 0x80
+    address = 0x81
     roboclaw = Roboclaw("/dev/serial0", 38400)
     result = roboclaw.Open()
     if result == 0:
