@@ -66,15 +66,15 @@ class MyController(Controller):
     # Chassis controls
         #Move down
     def on_R3_down(self, arg):
-        print('Move forward: ' + str(round(arg)))
-        topleftforward()
-        toprightforward()
+        print('Move backward: ' + str(round(arg)))
+        # topleftforward()
+        # toprightforward()
 
 
 
         #Move forward
     def on_R3_up(self, arg):
-        print('Move backward: ' + str(round(arg)))
+        print('Move forward: ' + str(round(arg)))
         
 
         # TODO
