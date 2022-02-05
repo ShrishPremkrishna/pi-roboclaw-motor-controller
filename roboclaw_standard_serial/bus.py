@@ -32,10 +32,10 @@ if __name__ == "__main__":
     
 
     def a():
-       run_controller(23, 94, 0)
+       run_controller(23, 94, 2)
 
     def b():
-        run_controller(23, 180, 0)
+        run_controller(23, 180, 2)
 
 
     threading.Thread(target=a).start()
