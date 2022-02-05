@@ -2,8 +2,6 @@ from serial import Serial
 from time import sleep
 import RPi.GPIO as GPIO
 
-test = Serial(None)
-
 def run_controller(pin, speed, run_time):
     
     GPIO.output(pin, GPIO.HIGH)
@@ -33,9 +31,10 @@ if __name__ == "__main__":
     
     while(1):
         
-        # run_controller(23, 94, 2)
-        # sleep(2)
-        test.write(64)
+        run_controller(23, 94, 2)
+        sleep(2)
+        run_controller(23, 180, 2)
+        sleep(2)
 
         break
     
