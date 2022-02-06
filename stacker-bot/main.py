@@ -21,18 +21,18 @@ class MyController(Controller):
         #Up
     def on_up_arrow_press(self):
         print("Linear slide Up")
-        roboclaw.ForwardM1(0x82,Lspeed)
-
-        #Down
-    def on_down_arrow_press(self):
-        print("Linear slide Down")
-        roboclaw.BackwardM1(0x82,Lspeed)
+        roboclaw.ForwardM1(0x82,5)
 
         #Release
     def on_up_down_arrow_release(self):
         print("Linear slide Stop")
         roboclaw.ForwardM1(0x82,0)
         roboclaw.BackwardM1(0x82,0)
+
+        #Down
+    def on_down_arrow_press(self):
+        print("Linear slide Down")
+        roboclaw.BackwardM1(0x82,5)
 
 
     # Event handlers for chassis control
