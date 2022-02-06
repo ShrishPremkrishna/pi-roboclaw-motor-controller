@@ -32,7 +32,7 @@ class MyController(Controller):
     def on_up_down_arrow_release(self):
         print("Linear slide Stop")
         roboclaw.ForwardM1(0x82,0)
-        roboclaw.BackwardM1(0x82,0)
+        #roboclaw.BackwardM1(0x82,0)
 
 
     # Event handlers for chassis control
