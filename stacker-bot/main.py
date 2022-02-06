@@ -2,7 +2,7 @@ from pyPS4Controller.controller import Controller
 from roboclaw import Roboclaw
 from time import sleep
 
-speed = 40
+speed = 20
 class MyController(Controller):
 
     def __init__(self, **kwargs):
