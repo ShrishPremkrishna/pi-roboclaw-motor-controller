@@ -3,6 +3,7 @@ from roboclaw import Roboclaw
 from time import sleep
 
 speed = 20
+Lspeed = 5
 class MyController(Controller):
 
     def __init__(self, **kwargs):
@@ -15,8 +16,26 @@ class MyController(Controller):
     def on_x_release(self):
        print("Goodbye world")
 
-       # Event handlers for chassis control
+    # Event handlers for linear slide
 
+        #Up
+    def on_up_arrow_press():
+        print("Linear slide Up")
+        roboclaw.ForwardM1(0x82,Lspeed)
+
+        #Down
+    def on_down_arrow_press():
+        print("Linear slide Down")
+        roboclaw.BackwardM1(0x82,Lspeed)
+
+        #Release
+    def on_up_down_arrow_release():
+        print("Linear slide Stop")
+        roboclaw.ForwardM1(0x82,0)
+        roboclaw.BackwardM1(0x82,0)
+
+
+    # Event handlers for chassis control
         #Down
     def on_L2_press(self, arg):
         print('R3 down: ' + str(round(arg)))
