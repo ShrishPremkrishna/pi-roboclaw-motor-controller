@@ -2,6 +2,7 @@ from pyPS4Controller.controller import Controller
 from roboclaw import Roboclaw
 from time import sleep
 
+speed = 40
 class MyController(Controller):
 
     def __init__(self, **kwargs):
@@ -19,50 +20,50 @@ class MyController(Controller):
         #Down
     def on_R3_down(self, arg):
         print('R3 down: ' + str(round(arg)))
-        roboclaw.ForwardM1(0x80,64)
-        roboclaw.ForwardM2(0x80,64)
-        roboclaw.ForwardM1(0x81,64)
-        roboclaw.ForwardM2(0x81,64)
+        roboclaw.ForwardM1(0x80,speed)
+        roboclaw.ForwardM2(0x80,speed)
+        roboclaw.ForwardM1(0x81,speed)
+        roboclaw.ForwardM2(0x81,speed)
 
         #Up
     def on_R3_up(self, arg):
         print('R3 up: ' + str(round(arg)))
-        roboclaw.BackwardM1(0x80,64)
-        roboclaw.BackwardM2(0x80,64)
-        roboclaw.BackwardM1(0x81,64)
-        roboclaw.BackwardM2(0x81,64)
+        roboclaw.BackwardM1(0x80,speed)
+        roboclaw.BackwardM2(0x80,speed)
+        roboclaw.BackwardM1(0x81,speed)
+        roboclaw.BackwardM2(0x81,speed)
 
         #Left
     def on_R3_left(self, arg):
         print('R3 left: ' + str(round(arg)))
-        roboclaw.ForwardM1(0x80,64)
-        roboclaw.BackwardM2(0x80,64)
-        roboclaw.BackwardM1(0x81,64)
-        roboclaw.ForwardM2(0x81,64)
+        roboclaw.ForwardM1(0x80,speed)
+        roboclaw.BackwardM2(0x80,speed)
+        roboclaw.BackwardM1(0x81,speed)
+        roboclaw.ForwardM2(0x81,speed)
 
         #Right
     def on_R3_right(self, arg):
         print('R3 right: ' + str(round(arg)))
-        roboclaw.BackwardM1(0x80,64)
-        roboclaw.ForwardM2(0x80,64)
-        roboclaw.ForwardM1(0x81,64)
-        roboclaw.BackwardM2(0x81,64)
+        roboclaw.BackwardM1(0x80,speed)
+        roboclaw.ForwardM2(0x80,speed)
+        roboclaw.ForwardM1(0x81,speed)
+        roboclaw.BackwardM2(0x81,speed)
 
         #Rotate Left
     def on_L3_left(self, arg):
         print('R3 left: ' + str(round(arg)))
-        roboclaw.ForwardM1(0x80,64)
-        roboclaw.BackwardM2(0x80,64)
-        roboclaw.ForwardM1(0x81,64)
-        roboclaw.BackwardM2(0x81,64)
+        roboclaw.ForwardM1(0x80,speed)
+        roboclaw.BackwardM2(0x80,speed)
+        roboclaw.ForwardM1(0x81,speed)
+        roboclaw.BackwardM2(0x81,speed)
 
         #Rotate right
     def on_L3_right(self, arg):
         print('R3 right: ' + str(round(arg)))
-        roboclaw.BackwardM1(0x80,64)
-        roboclaw.ForwardM2(0x80,64)
-        roboclaw.BackwardM1(0x81,64)
-        roboclaw.ForwardM2(0x81,64)
+        roboclaw.BackwardM1(0x80,speed)
+        roboclaw.ForwardM2(0x80,speed)
+        roboclaw.BackwardM1(0x81,speed)
+        roboclaw.ForwardM2(0x81,speed)
 
         #At rest y-axis on r3
     def on_R3_y_at_rest(self):
