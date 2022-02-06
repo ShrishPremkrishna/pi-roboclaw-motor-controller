@@ -34,32 +34,32 @@ class MyController(Controller):
         roboclaw.BackwardM2(0x81,speed)
 
         #Left
-    def on_L1_press(self, arg):
-        print('R3 left: ' + str(round(arg)))
+    def on_L1_press(self):
+        print('R3 left: ')
         roboclaw.ForwardM1(0x80,speed)
         roboclaw.BackwardM2(0x80,speed)
         roboclaw.BackwardM1(0x81,speed)
         roboclaw.ForwardM2(0x81,speed)
 
         #Right
-    def on_R1_press(self, arg):
-        print('R3 right: ' + str(round(arg)))
+    def on_R1_press(self):
+        print('R3 right: ')
         roboclaw.BackwardM1(0x80,speed)
         roboclaw.ForwardM2(0x80,speed)
         roboclaw.ForwardM1(0x81,speed)
         roboclaw.BackwardM2(0x81,speed)
 
         #Rotate Left
-    def on_left_arrow_press(self, arg):
-        print('R3 left: ' + str(round(arg)))
+    def on_left_arrow_press(self):
+        print('R3 left: ')
         roboclaw.ForwardM1(0x80,speed)
         roboclaw.BackwardM2(0x80,speed)
         roboclaw.ForwardM1(0x81,speed)
         roboclaw.BackwardM2(0x81,speed)
 
         #Rotate right
-    def on_right_arrow_press(self, arg):
-        print('R3 right: ' + str(round(arg)))
+    def on_right_arrow_press(self):
+        print('R3 right: ')
         roboclaw.BackwardM1(0x80,speed)
         roboclaw.ForwardM2(0x80,speed)
         roboclaw.BackwardM1(0x81,speed)
