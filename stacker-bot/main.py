@@ -53,7 +53,7 @@ class MyController(Controller):
 
     def on_circle_release(self):
         print("On Circle Release")
-        pwm.setPWM(self.barlift_channel, 0, 4096)
+        # pwm.setPWM(self.barlift_channel, 0, 4096)
 
     def on_square_press(self):
         print("On Square Press")
@@ -61,10 +61,11 @@ class MyController(Controller):
             self.barlift_pulse = self.barlift_pulse + 100
             pwm.setServoPulse(self.barlift_channel, self.barlift_pulse) 
             sleep(0.02)
+        # pwm.setPWM(self.barlift_channel, 0, 4096)
         
     def on_square_release(self):
         print("On Square Release")
-        pwm.setPWM(self.barlift_channel, 0, 4096)
+        
 
     # Event handlers for linear slide
 
