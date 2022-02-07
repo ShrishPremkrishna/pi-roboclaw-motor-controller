@@ -5,6 +5,14 @@ from time import sleep
 
 speed = 20
 Lspeed = 20
+gripper_pulse = 2000
+gripper_channel = 0
+gripper_max = 2000
+gripper_min = 1300
+barlift_pulse = 2300
+barlift_channel = 2
+barlift_max = 2200
+barlift_min = 800
 
 
 class MyController(Controller):
@@ -184,18 +192,8 @@ if __name__ == "__main__":
     
     pwm = PCA9685(0x40, debug=True)
     pwm.setPWMFreq(50)
-    gripper_pulse = 2000
-    gripper_channel = 0
-    gripper_max = 2000
-    gripper_min = 1300
-    barlift_pulse = 2300
-    barlift_channel = 2
-    barlift_max = 2200
-    barlift_min = 800
-    # pwm.setServoPulse(gripper_channel,gripper_pulse) 
-    # pwm.setServoPulse(barlift_channel,barlift_pulse) 
-    pwm.setPWM(gripper_channel, 0, 4096)
-    pwm.setPWM(barlift_channel, 0, 4096)
+    pwm.setPWM(0, 0, 4096)
+    pwm.setPWM(2, 0, 4096)
 
     controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
     controller.listen(timeout=6)
