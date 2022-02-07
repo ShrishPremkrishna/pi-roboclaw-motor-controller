@@ -90,4 +90,5 @@ if __name__=='__main__':
     for i in range(2000,1000,-10):
         pwm.setServoPulse(0,i) 
         time.sleep(0.02)
+    pwm.setPWMFreq(50)
     pwm.close()
