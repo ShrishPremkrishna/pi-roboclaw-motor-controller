@@ -18,7 +18,7 @@ class MyController(Controller):
         self.gripper_min = 1300
         self.barlift_pulse = 2300
         self.barlift_channel = 2
-        self.barlift_max = 2200
+        self.barlift_max = 2400
         self.barlift_min = 800
 
     # Gripper controls
@@ -46,15 +46,16 @@ class MyController(Controller):
     # Bar Lift controls
     def on_circle_press(self):
         print("On Circle Press")
-        for i in range(self.barlift_max, self.barlift_min,-10):
+        for i in range(self.barlift_max, self.barlift_min,-100):
             pwm.setServoPulse(self.barlift_channel, i) 
             sleep(0.02)
 
     def on_square_press(self):
         print("On Square Press")
-        for i in range(self.barlift_min, self.barlift_max,10):  
+        for i in range(self.barlift_min, self.barlift_max,100):  
             pwm.setServoPulse(self.barlift_channel, i)   
             sleep(0.02)
+        pwm.setPWM(self.barlift_channel, 0, 4096)
 
 
     # Event handlers for linear slide
