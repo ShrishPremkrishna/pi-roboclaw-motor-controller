@@ -1,5 +1,6 @@
 from pyPS4Controller.controller import Controller
 from roboclaw import Roboclaw
+from PCA9685 import PCA9685
 from time import sleep
 
 speed = 20
@@ -11,10 +12,17 @@ class MyController(Controller):
 
     # sample ps4 event handlers
     def on_x_press(self):
-       print("Hello world")
+        print("On X Press")
+        for i in range(2000,1300,-10):
+            pwm.setServoPulse(0,i) 
+            sleep(0.02)
+        pwm.setPWM(0, 0, 4096)
 
     def on_x_release(self):
-       print("Goodbye world")
+        print("Goodbye world")
+        for i in range(1300,2000,10):  
+            pwm.setServoPulse(0,i)   
+            sleep(0.02)
 
     # Event handlers for linear slide
 
@@ -141,6 +149,10 @@ if __name__ == "__main__":
     print('Printing connection result - ' + str(result))
     print('Connection - ' + str(roboclaw._port.is_open))
     
+    pwm = PCA9685(0x40, debug=True)
+    pwm.setPWMFreq(50)
+    gripper_pulse = 2000
+
     controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
     controller.listen(timeout=6)
 
