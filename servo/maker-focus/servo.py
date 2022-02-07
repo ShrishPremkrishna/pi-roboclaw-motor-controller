@@ -75,6 +75,8 @@ class PCA9685:
       print("closing bus")
       result = self.bus.close()
       print(result)
+      result = self.write(self.__MODE1, 0x00)
+      print(result)
 
 if __name__=='__main__':
  
