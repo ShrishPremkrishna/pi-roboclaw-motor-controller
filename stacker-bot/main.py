@@ -46,9 +46,13 @@ class MyController(Controller):
     # Bar Lift controls
     def on_circle_press(self):
         print("On Circle Press")
-        for i in range(self.barlift_max, self.barlift_min,-100):
-            pwm.setServoPulse(self.barlift_channel, i) 
+        if (self.barlift_pulse > self.barlift_min) :
+            self.barlift_pulse = self.barlift_pulse - 100
+            pwm.setServoPulse(self.barlift_channel, self.barlift_pulse) 
             sleep(0.02)
+        # for i in range(self.barlift_max, self.barlift_min,-100):
+        #     pwm.setServoPulse(self.barlift_channel, i) 
+        #     sleep(0.02)
 
     def on_square_press(self):
         print("On Square Press")
@@ -183,7 +187,7 @@ if __name__ == "__main__":
     print('Printing connection result - ' + str(result))
     print('Connection - ' + str(roboclaw._port.is_open))
     
-    pwm = PCA9685(0x40, debug=True)
+    pwm = PCA9685(0x40, debug=False)
     pwm.setPWMFreq(50)
     pwm.setPWM(0, 0, 4096)
     pwm.setPWM(2, 0, 4096)
