@@ -46,10 +46,10 @@ class MyController(Controller):
     # Bar Lift controls
     def on_circle_press(self):
         print("On Circle Press - lift barlift")
-        print("Barlift pulse at" + str(self.barlift_pulse))
+        print("Barlift pulse at - " + str(self.barlift_pulse))
         if (self.barlift_pulse < self.barlift_max) :
             self.barlift_pulse = self.barlift_pulse + 200
-            print("Barlift pulse being set at" + str(self.barlift_pulse))
+            print("Barlift pulse being set at - " + str(self.barlift_pulse))
             pwm.setServoPulse(self.barlift_channel, self.barlift_pulse) 
             sleep(0.02)
         # for i in range(self.barlift_max, self.barlift_min,-100):
@@ -58,10 +58,10 @@ class MyController(Controller):
 
     def on_square_press(self):
         print("On Square Press - lower barlift")
-        print("Barlift pulse at" + str(self.barlift_pulse))
+        print("Barlift pulse at - " + str(self.barlift_pulse))
         if (self.barlift_pulse > self.barlift_min) :
             self.barlift_pulse = self.barlift_pulse - 100
-            print("Barlift pulse being set at" + str(self.barlift_pulse))
+            print("Barlift pulse being set at - " + str(self.barlift_pulse))
             pwm.setServoPulse(self.barlift_channel, self.barlift_pulse) 
             sleep(0.02)
         # for i in range(self.barlift_min, self.barlift_max,100):  
