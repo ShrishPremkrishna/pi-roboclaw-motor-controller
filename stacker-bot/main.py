@@ -5,25 +5,57 @@ from time import sleep
 
 speed = 20
 Lspeed = 20
+
+
 class MyController(Controller):
 
     def __init__(self, **kwargs):
         Controller.__init__(self, **kwargs)
 
-    # sample ps4 event handlers
+    # Gripper controls
     def on_x_press(self):
         print("On X Press")
-        for i in range(2000,1300,-10):
-            pwm.setServoPulse(0,i) 
+        if (gripper_pulse > gripper_min) :
+            gripper_pulse = gripper_pulse - 100
+            pwm.setServoPulse(gripper_channel, gripper_pulse) 
             sleep(0.02)
         
 
     def on_x_release(self):
-        print("Goodbye world")
-        for i in range(1300,2000,10):  
-            pwm.setServoPulse(0,i)   
+        pwm.setPWM(gripper_channel, 0, 4096)
+
+    def on_triangle_press(self):
+        print("On Triangle Press")
+        if (gripper_pulse < gripper_max) :
+            gripper_pulse = gripper_pulse + 100
+            pwm.setServoPulse(gripper_channel, gripper_pulse) 
             sleep(0.02)
-        pwm.setPWM(0, 0, 4096)
+        
+    def on_triangle_release(self):
+        pwm.setPWM(gripper_channel, 0, 4096)
+
+    # Bar Lift controls
+    def on_circle_press(self):
+        print("On Circle Press")
+        if (barlift_pulse > barlift_min) :
+            barlift_pulse = barlift_pulse - 100
+            pwm.setServoPulse(barlift_channel, barlift_pulse) 
+            sleep(0.02)
+
+    def on_circle_release(self):
+        print("On Circle Release")
+        pwm.setPWM(barlift_channel, 0, 4096)
+
+    def on_square_press(self):
+        print("On Square Press")
+        if (barlift_pulse < barlift_max) :
+            barlift_pulse = barlift_pulse + 100
+            pwm.setServoPulse(barlift_channel, barlift_pulse) 
+            sleep(0.02)
+        
+    def on_square_release(self):
+        print("On Square Release")
+        pwm.setPWM(barlift_channel, 0, 4096)
 
     # Event handlers for linear slide
 
@@ -153,6 +185,15 @@ if __name__ == "__main__":
     pwm = PCA9685(0x40, debug=True)
     pwm.setPWMFreq(50)
     gripper_pulse = 2000
+    gripper_channel = 0
+    gripper_max = 2000
+    gripper_min = 1300
+    barlift_pulse = 2300
+    barlift_channel = 2
+    barlift_max = 2200
+    barlift_min = 800
+    pwm.setServoPulse(gripper_channel,gripper_pulse) 
+    pwm.setServoPulse(barlift_channel,barlift_pulse) 
 
     controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
     controller.listen(timeout=6)
