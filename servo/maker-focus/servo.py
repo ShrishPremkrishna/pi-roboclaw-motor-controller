@@ -72,6 +72,7 @@ class PCA9685:
 
 
   def close(self):
+      print("closing bus")
       self.bus.close()
 
 if __name__=='__main__':
