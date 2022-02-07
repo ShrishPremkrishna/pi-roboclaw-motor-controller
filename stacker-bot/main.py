@@ -4,7 +4,7 @@ from PCA9685 import PCA9685
 from time import sleep
 
 speed = 20
-Lspeed = 20
+Lspeed = 35
 
 
 
@@ -22,7 +22,7 @@ class MyController(Controller):
         self.barlift_min = 600
 
     # Gripper controls
-    def on_x_press(self):
+    def on_square_press(self):
         print("On X Press")
         if (self.gripper_pulse > self.gripper_min) :
             self.gripper_pulse = self.gripper_pulse - 100
@@ -30,22 +30,22 @@ class MyController(Controller):
             sleep(0.02)
         
 
-    def on_x_release(self):
+    def on_square_release(self):
         pwm.setPWM(self.gripper_channel, 0, 4096)
 
-    def on_triangle_press(self):
+    def on_circle_press(self):
         print("On Triangle Press")
         if (self.gripper_pulse < self.gripper_max) :
             self.gripper_pulse = self.gripper_pulse + 200
             pwm.setServoPulse(self.gripper_channel, self.gripper_pulse) 
             sleep(0.02)
         
-    def on_triangle_release(self):
+    def on_circle_release(self):
         pwm.setPWM(self.gripper_channel, 0, 4096)
 
     # Bar Lift controls
-    def on_circle_press(self):
-        print("On Circle Press - lift barlift")
+    def on_triangle_press(self):
+        print("On Traingle Press - lift barlift")
         print("Barlift pulse at - " + str(self.barlift_pulse))
         if (self.barlift_pulse < self.barlift_max) :
             for i in range(self.barlift_pulse, self.barlift_pulse + 200, 10):  
@@ -54,8 +54,8 @@ class MyController(Controller):
             print("Barlift pulse being set at - " + str(self.barlift_pulse))
             self.barlift_pulse = self.barlift_pulse + 200 
 
-    def on_square_press(self):
-        print("On Square Press - lower barlift")
+    def on_x_press(self):
+        print("On X Press - lower barlift")
         print("Barlift pulse at - " + str(self.barlift_pulse))
         if (self.barlift_pulse > self.barlift_min) :
             print("Barlift pulse being set at - " + str(self.barlift_pulse))
@@ -108,18 +108,18 @@ class MyController(Controller):
         #Left
     def on_L1_press(self):
         print('R3 left: ')
-        roboclaw.ForwardM1(0x80,speed)
-        roboclaw.BackwardM2(0x80,speed)
-        roboclaw.BackwardM1(0x81,speed)
-        roboclaw.ForwardM2(0x81,speed)
-
-        #Right
-    def on_R1_press(self):
-        print('R3 right: ')
         roboclaw.BackwardM1(0x80,speed)
         roboclaw.ForwardM2(0x80,speed)
         roboclaw.ForwardM1(0x81,speed)
         roboclaw.BackwardM2(0x81,speed)
+
+        #Right
+    def on_R1_press(self):
+        print('R3 right: ')
+        roboclaw.ForwardM1(0x80,speed)
+        roboclaw.BackwardM2(0x80,speed)
+        roboclaw.BackwardM1(0x81,speed)
+        roboclaw.ForwardM2(0x81,speed)
 
         #Rotate Left
     def on_left_arrow_press(self):
