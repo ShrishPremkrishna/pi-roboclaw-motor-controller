@@ -16,10 +16,10 @@ class MyController(Controller):
         self.gripper_channel = 0
         self.gripper_max = 2000
         self.gripper_min = 1300
-        self.barlift_pulse = 800
+        self.barlift_pulse = 600
         self.barlift_channel = 2
         self.barlift_max = 2200
-        self.barlift_min = 800
+        self.barlift_min = 600
 
     # Gripper controls
     def on_x_press(self):
@@ -36,7 +36,7 @@ class MyController(Controller):
     def on_triangle_press(self):
         print("On Triangle Press")
         if (self.gripper_pulse < self.gripper_max) :
-            self.gripper_pulse = self.gripper_pulse + 100
+            self.gripper_pulse = self.gripper_pulse + 200
             pwm.setServoPulse(self.gripper_channel, self.gripper_pulse) 
             sleep(0.02)
         
@@ -48,7 +48,7 @@ class MyController(Controller):
         print("On Circle Press - lift barlift")
         print("Barlift pulse at" + str(self.barlift_pulse))
         if (self.barlift_pulse < self.barlift_max) :
-            self.barlift_pulse = self.barlift_pulse + 100
+            self.barlift_pulse = self.barlift_pulse + 200
             print("Barlift pulse being set at" + str(self.barlift_pulse))
             pwm.setServoPulse(self.barlift_channel, self.barlift_pulse) 
             sleep(0.02)
