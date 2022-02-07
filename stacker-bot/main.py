@@ -46,26 +46,15 @@ class MyController(Controller):
     # Bar Lift controls
     def on_circle_press(self):
         print("On Circle Press")
-        if (self.barlift_pulse > self.barlift_min) :
-            self.barlift_pulse = self.barlift_pulse - 100
-            pwm.setServoPulse(self.barlift_channel, self.barlift_pulse) 
+        for i in range(self.barlift_min, self.barlift_max,10):  
+            pwm.setServoPulse(self.barlift_channel, self.barlift_pulse)   
             sleep(0.02)
-
-    def on_circle_release(self):
-        print("On Circle Release")
-        # pwm.setPWM(self.barlift_channel, 0, 4096)
 
     def on_square_press(self):
         print("On Square Press")
-        if (self.barlift_pulse < self.barlift_max) :
-            self.barlift_pulse = self.barlift_pulse + 100
+        for i in range(self.barlift_max, self.barlift_min,-10):
             pwm.setServoPulse(self.barlift_channel, self.barlift_pulse) 
             sleep(0.02)
-        # pwm.setPWM(self.barlift_channel, 0, 4096)
-        
-    def on_square_release(self):
-        print("On Square Release")
-        
 
     # Event handlers for linear slide
 
