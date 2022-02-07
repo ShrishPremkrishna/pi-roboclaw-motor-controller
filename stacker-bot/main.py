@@ -192,8 +192,10 @@ if __name__ == "__main__":
     barlift_channel = 2
     barlift_max = 2200
     barlift_min = 800
-    pwm.setServoPulse(gripper_channel,gripper_pulse) 
-    pwm.setServoPulse(barlift_channel,barlift_pulse) 
+    # pwm.setServoPulse(gripper_channel,gripper_pulse) 
+    # pwm.setServoPulse(barlift_channel,barlift_pulse) 
+    pwm.setPWM(gripper_channel, 0, 4096)
+    pwm.setPWM(barlift_channel, 0, 4096)
 
     controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
     controller.listen(timeout=6)
