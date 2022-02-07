@@ -25,8 +25,8 @@ class PCA9685:
   def write(self, reg, value):
     "Writes an 8-bit value to the specified register/address"
     self.bus.write_byte_data(self.address, reg, value)
-    if (self.debug):
-      print("I2C: Write 0x%02X to register 0x%02X" % (value, reg))
+    # if (self.debug):
+    #   print("I2C: Write 0x%02X to register 0x%02X" % (value, reg))
 	  
   def read(self, reg):
     "Read an unsigned byte from the I2C device"
@@ -75,8 +75,7 @@ class PCA9685:
       print("closing bus")
       result = self.bus.close()
       print(result)
-      result = self.write(self.__MODE1, 0x00)
-      print(result)
+      
 
 if __name__=='__main__':
  
@@ -90,5 +89,6 @@ if __name__=='__main__':
     for i in range(2000,1000,-10):
         pwm.setServoPulse(0,i) 
         time.sleep(0.02)
-    pwm.setPWMFreq(50)
+    # pwm.setPWMFreq(50)
+    pwm.setPWM(0, 0, 4096)
     pwm.close()
