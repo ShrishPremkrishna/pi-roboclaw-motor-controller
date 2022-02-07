@@ -16,10 +16,10 @@ class MyController(Controller):
         self.gripper_channel = 0
         self.gripper_max = 2000
         self.gripper_min = 1300
-        self.barlift_pulse = 2300
+        self.barlift_pulse = 800
         self.barlift_channel = 2
-        self.barlift_max = 2400
-        self.barlift_min = 1000
+        self.barlift_max = 2200
+        self.barlift_min = 800
 
     # Gripper controls
     def on_x_press(self):
@@ -45,10 +45,10 @@ class MyController(Controller):
 
     # Bar Lift controls
     def on_circle_press(self):
-        print("On Circle Press")
+        print("On Circle Press - lift barlift")
         print("Barlift pulse at" + str(self.barlift_pulse))
-        if (self.barlift_pulse > self.barlift_min) :
-            self.barlift_pulse = self.barlift_pulse - 100
+        if (self.barlift_pulse < self.barlift_max) :
+            self.barlift_pulse = self.barlift_pulse + 100
             print("Barlift pulse being set at" + str(self.barlift_pulse))
             pwm.setServoPulse(self.barlift_channel, self.barlift_pulse) 
             sleep(0.02)
@@ -57,11 +57,18 @@ class MyController(Controller):
         #     sleep(0.02)
 
     def on_square_press(self):
-        print("On Square Press")
-        for i in range(self.barlift_min, self.barlift_max,100):  
-            pwm.setServoPulse(self.barlift_channel, i)   
+        print("On Square Press - lower barlift")
+        print("Barlift pulse at" + str(self.barlift_pulse))
+        if (self.barlift_pulse > self.barlift_min) :
+            self.barlift_pulse = self.barlift_pulse - 100
+            print("Barlift pulse being set at" + str(self.barlift_pulse))
+            pwm.setServoPulse(self.barlift_channel, self.barlift_pulse) 
             sleep(0.02)
-        pwm.setPWM(self.barlift_channel, 0, 4096)
+        # for i in range(self.barlift_min, self.barlift_max,100):  
+        #     pwm.setServoPulse(self.barlift_channel, i)   
+        #     sleep(0.02)
+        if (self.barlift_pulse <= self.barlift_min + 100):
+            pwm.setPWM(self.barlift_channel, 0, 4096)
 
 
     # Event handlers for linear slide
