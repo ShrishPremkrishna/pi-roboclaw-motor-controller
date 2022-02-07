@@ -16,13 +16,14 @@ class MyController(Controller):
         for i in range(2000,1300,-10):
             pwm.setServoPulse(0,i) 
             sleep(0.02)
-        pwm.setPWM(0, 0, 4096)
+        
 
     def on_x_release(self):
         print("Goodbye world")
         for i in range(1300,2000,10):  
             pwm.setServoPulse(0,i)   
             sleep(0.02)
+        pwm.setPWM(0, 0, 4096)
 
     # Event handlers for linear slide
 
