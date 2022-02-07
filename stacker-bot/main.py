@@ -5,65 +5,66 @@ from time import sleep
 
 speed = 20
 Lspeed = 20
-gripper_pulse = 2000
-gripper_channel = 0
-gripper_max = 2000
-gripper_min = 1300
-barlift_pulse = 2300
-barlift_channel = 2
-barlift_max = 2200
-barlift_min = 800
+
 
 
 class MyController(Controller):
 
     def __init__(self, **kwargs):
         Controller.__init__(self, **kwargs)
+        self.gripper_pulse = 2000
+        self.gripper_channel = 0
+        self.gripper_max = 2000
+        self.gripper_min = 1300
+        self.barlift_pulse = 2300
+        self.barlift_channel = 2
+        self.barlift_max = 2200
+        self.barlift_min = 800
 
     # Gripper controls
     def on_x_press(self):
         print("On X Press")
-        if (gripper_pulse > gripper_min) :
-            gripper_pulse = gripper_pulse - 100
-            pwm.setServoPulse(gripper_channel, gripper_pulse) 
+        if (self.gripper_pulse > self.gripper_min) :
+            self.gripper_pulse = self.gripper_pulse - 100
+            pwm.setServoPulse(self.gripper_channel, self.gripper_pulse) 
             sleep(0.02)
         
 
     def on_x_release(self):
-        pwm.setPWM(gripper_channel, 0, 4096)
+        pwm.setPWM(self.gripper_channel, 0, 4096)
 
     def on_triangle_press(self):
         print("On Triangle Press")
-        if (gripper_pulse < gripper_max) :
-            gripper_pulse = gripper_pulse + 100
-            pwm.setServoPulse(gripper_channel, gripper_pulse) 
+        if (self.gripper_pulse < self.gripper_max) :
+            self.gripper_pulse = self.gripper_pulse + 100
+            pwm.setServoPulse(self.gripper_channel, self.gripper_pulse) 
             sleep(0.02)
         
     def on_triangle_release(self):
-        pwm.setPWM(gripper_channel, 0, 4096)
+        pwm.setPWM(self.gripper_channel, 0, 4096)
 
     # Bar Lift controls
     def on_circle_press(self):
         print("On Circle Press")
-        if (barlift_pulse > barlift_min) :
-            barlift_pulse = barlift_pulse - 100
-            pwm.setServoPulse(barlift_channel, barlift_pulse) 
+        if (self.barlift_pulse > self.barlift_min) :
+            self.barlift_pulse = self.barlift_pulse - 100
+            pwm.setServoPulse(self.barlift_channel, self.barlift_pulse) 
             sleep(0.02)
 
     def on_circle_release(self):
         print("On Circle Release")
-        pwm.setPWM(barlift_channel, 0, 4096)
+        pwm.setPWM(self.barlift_channel, 0, 4096)
 
     def on_square_press(self):
         print("On Square Press")
-        if (barlift_pulse < barlift_max) :
-            barlift_pulse = barlift_pulse + 100
-            pwm.setServoPulse(barlift_channel, barlift_pulse) 
+        if (self.barlift_pulse < self.barlift_max) :
+            self.barlift_pulse = self.barlift_pulse + 100
+            pwm.setServoPulse(self.barlift_channel, self.barlift_pulse) 
             sleep(0.02)
         
     def on_square_release(self):
         print("On Square Release")
-        pwm.setPWM(barlift_channel, 0, 4096)
+        pwm.setPWM(self.barlift_channel, 0, 4096)
 
     # Event handlers for linear slide
 
