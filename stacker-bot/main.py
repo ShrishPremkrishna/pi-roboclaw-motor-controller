@@ -2,9 +2,12 @@ from pyPS4Controller.controller import Controller
 from roboclaw import Roboclaw
 from PCA9685 import PCA9685
 from time import sleep
+import cv2
+from threading import Thread
 
 speed = 20
 Lspeed = 35
+
 
 
 
@@ -20,6 +23,31 @@ class MyController(Controller):
         self.barlift_channel = 2
         self.barlift_max = 2200
         self.barlift_min = 600
+        self.cameraClick = False
+        self.cameraOn = False
+        self.img_counter = 0
+
+    def runCamera(self):
+        camera = cv2.VideoCapture(0)
+        cv2.namedWindow("frame")
+        while True:
+            ret, frame = camera.read()
+            if not ret:
+                print("Failed to grab frame")
+                break
+            cv2.imshow("frame", frame)
+      
+            if not self.cameraOn:
+                print("Camera closing")
+                break
+            elif self.cameraClick:
+                self.cameraClick = False
+                img_name = "opencv_frame_{}.jpg".format(self.img_counter)
+                cv2.imwrite(img_name, frame)
+                print("{} written!".format(img_name))
+                self.img_counter += 1
+        camera.release()
+        cv2.destroyAllWindows()
 
     # Gripper controls
     def on_square_press(self):
@@ -29,7 +57,6 @@ class MyController(Controller):
             pwm.setServoPulse(self.gripper_channel, self.gripper_pulse) 
             sleep(0.02)
         
-
     def on_square_release(self):
         pwm.setPWM(self.gripper_channel, 0, 4096)
 
@@ -68,9 +95,7 @@ class MyController(Controller):
         if (self.barlift_pulse <= self.barlift_min + 100):
             pwm.setPWM(self.barlift_channel, 0, 4096)
 
-
     # Event handlers for linear slide
-
         #Up
     def on_up_arrow_press(self):
         print("Linear slide Up")
@@ -85,13 +110,25 @@ class MyController(Controller):
     def on_up_down_arrow_release(self):
         print("Linear slide Stop")
         roboclaw.ForwardM1(0x82,0)
-        #roboclaw.BackwardM1(0x82,0)
 
+    # Event handlers for Camera
+
+    def on_R3_press(self):
+        if self.cameraOn:
+            self.cameraOn = False
+        else:
+            self.cameraOn = True
+            t1 = Thread(target=self.runCamera())
+            t1.start()
+            
+
+    def on_L3_press(self):
+        self.cameraClick = True
 
     # Event handlers for chassis control
         #Down
     def on_L2_press(self, arg):
-        print('R3 down: ' + str(round(arg)))
+        print('L2 down: ' + str(round(arg)))
         roboclaw.ForwardM1(0x80,speed)
         roboclaw.ForwardM2(0x80,speed)
         roboclaw.ForwardM1(0x81,speed)
@@ -99,7 +136,7 @@ class MyController(Controller):
 
         #Up
     def on_R2_press(self, arg):
-        print('R3 up: ' + str(round(arg)))
+        print('R2 up: ' + str(round(arg)))
         roboclaw.BackwardM1(0x80,speed)
         roboclaw.BackwardM2(0x80,speed)
         roboclaw.BackwardM1(0x81,speed)
@@ -107,7 +144,7 @@ class MyController(Controller):
 
         #Left
     def on_L1_press(self):
-        print('R3 left: ')
+        print('L1 left: ')
         roboclaw.BackwardM1(0x80,speed)
         roboclaw.ForwardM2(0x80,speed)
         roboclaw.ForwardM1(0x81,speed)
@@ -115,7 +152,7 @@ class MyController(Controller):
 
         #Right
     def on_R1_press(self):
-        print('R3 right: ')
+        print('R1 right: ')
         roboclaw.ForwardM1(0x80,speed)
         roboclaw.BackwardM2(0x80,speed)
         roboclaw.BackwardM1(0x81,speed)
@@ -123,7 +160,7 @@ class MyController(Controller):
 
         #Rotate Left
     def on_left_arrow_press(self):
-        print('R3 left: ')
+        print('Left Arrow left: ')
         roboclaw.ForwardM1(0x80,speed)
         roboclaw.BackwardM2(0x80,speed)
         roboclaw.ForwardM1(0x81,speed)
@@ -131,31 +168,28 @@ class MyController(Controller):
 
         #Rotate right
     def on_right_arrow_press(self):
-        print('R3 right: ')
+        print('Right Arrow right: ')
         roboclaw.BackwardM1(0x80,speed)
         roboclaw.ForwardM2(0x80,speed)
         roboclaw.BackwardM1(0x81,speed)
         roboclaw.ForwardM2(0x81,speed)
 
-        #At rest y-axis on r3
     def on_L2_release(self):
-        print("r3 y rest")
+        print("L2 y rest")
         roboclaw.ForwardM1(0x80,0)
         roboclaw.ForwardM2(0x80,0)
         roboclaw.ForwardM1(0x81,0)
         roboclaw.ForwardM2(0x81,0)
      
-        #At rest x-axis on r3
     def on_R2_release(self):
-        print("r3 x rest")
+        print("r2 x rest")
         roboclaw.ForwardM1(0x80,0)
         roboclaw.ForwardM2(0x80,0)
         roboclaw.ForwardM1(0x81,0)
         roboclaw.ForwardM2(0x81,0)
 
-        #At rest x-axis on l3
     def on_R1_release(self):
-        print("r3 x rest")
+        print("r1 x rest")
         roboclaw.ForwardM1(0x80,0)
         roboclaw.ForwardM2(0x80,0)
         roboclaw.ForwardM1(0x81,0)
@@ -201,6 +235,31 @@ if __name__ == "__main__":
 
     controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
     controller.listen(timeout=6)
+
+
+
+    # camera = cv2.VideoCapture(0)
+    # cv2.namedWindow("test")
+
+    # img_counter = 0
+
+    # while True:
+    #     ret, frame = camera.read()
+    #     if not ret:
+    #         print("failed to grab frame")
+    #         break
+    #     cv2.imshow("test", frame)
+
+        # if k%256 == 27:
+        #     # ESC pressed
+        #     print("Escape hit, closing...")
+        #     break
+        # elif k%256 == 32:
+        #     # SPACE pressed
+        #     img_name = "opencv_frame_{}.png".format(img_counter)
+        #     cv2.imwrite(img_name, frame)
+        #     print("{} written!".format(img_name))
+        #     img_counter += 1
 
 
 #    # Event handlers for chassis control
