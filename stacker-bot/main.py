@@ -26,6 +26,7 @@ class MyController(Controller):
         self.cameraClick = False
         self.cameraOn = False
         self.img_counter = 0
+        self.camera = cv2.VideoCapture(0)
 
     def runCamera(self):
         camera = cv2.VideoCapture(0)
@@ -36,7 +37,7 @@ class MyController(Controller):
                 print("Failed to grab frame")
                 break
             print("Starting imshow")
-            cv2.imshow("frame", frame)
+            cv2.imshow("Frame", frame)
       
             if not self.cameraOn:
                 print("Camera closing")
@@ -116,20 +117,25 @@ class MyController(Controller):
 
     def on_R3_press(self):
         print("R3 Pressed")
-        if self.cameraOn:
-            self.cameraOn = False
-            print("Camera Off")
-        else:
-            self.cameraOn = True
-            print("Camera On")
-            t1 = Thread(target=self.runCamera())
-            print("Statring Thread")
-            t1.start()
+        ret, frame = self.camera.read()
+        img_name = "opencv_frame_{}.jpg".format(self.img_counter)
+        self.img_counter += 1
+        cv2.imwrite(img_name, frame)
+        print("{} written!".format(img_name))
+        # if self.cameraOn:
+        #     self.cameraOn = False
+        #     print("Camera Off")
+        # else:
+        #     self.cameraOn = True
+        #     print("Camera On")
+        #     t1 = Thread(target=self.runCamera())
+        #     print("Statring Thread")
+        #     t1.start()
             
 
     def on_L3_press(self):
         print("L3 Pressed")
-        self.cameraClick = True
+        # self.cameraClick = True
 
     # Event handlers for chassis control
         #Down
