@@ -30,6 +30,7 @@ class MyController(Controller):
     def runCamera(self):
         camera = cv2.VideoCapture(0)
         cv2.namedWindow("frame")
+        print("Starting video capture")
         while True:
             ret, frame = camera.read()
             if not ret:
@@ -114,15 +115,20 @@ class MyController(Controller):
     # Event handlers for Camera
 
     def on_R3_press(self):
+        print("R3 Pressed")
         if self.cameraOn:
             self.cameraOn = False
+            print("Camera Off")
         else:
             self.cameraOn = True
+            print("Camera On")
             t1 = Thread(target=self.runCamera())
+            print("Statring Thread")
             t1.start()
             
 
     def on_L3_press(self):
+        print("L3 Pressed")
         self.cameraClick = True
 
     # Event handlers for chassis control
