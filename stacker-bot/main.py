@@ -29,13 +29,13 @@ class MyController(Controller):
 
     def runCamera(self):
         camera = cv2.VideoCapture(0)
-        cv2.namedWindow("frame")
         print("Starting video capture")
         while True:
             ret, frame = camera.read()
             if not ret:
                 print("Failed to grab frame")
                 break
+            print("Starting imshow")
             cv2.imshow("frame", frame)
       
             if not self.cameraOn:
