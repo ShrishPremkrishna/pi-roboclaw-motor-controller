@@ -2,8 +2,6 @@ from pyPS4Controller.controller import Controller
 from roboclaw import Roboclaw
 from PCA9685 import PCA9685
 from time import sleep
-import cv2
-from threading import Thread
 
 speed = 20
 Lspeed = 35
@@ -19,37 +17,16 @@ class MyController(Controller):
         self.gripper_channel = 0
         self.gripper_max = 2000
         self.gripper_min = 1300
+
         self.barlift_pulse = 600
         self.barlift_channel = 2
         self.barlift_max = 2200
         self.barlift_min = 600
-        self.cameraClick = False
-        self.cameraOn = False
-        self.img_counter = 0
-        self.camera = cv2.VideoCapture(0)
 
-    def runCamera(self):
-        camera = cv2.VideoCapture(0)
-        print("Starting video capture")
-        while True:
-            ret, frame = camera.read()
-            if not ret:
-                print("Failed to grab frame")
-                break
-            print("Starting imshow")
-            cv2.imshow("Frame", frame)
-      
-            if not self.cameraOn:
-                print("Camera closing")
-                break
-            elif self.cameraClick:
-                self.cameraClick = False
-                img_name = "opencv_frame_{}.jpg".format(self.img_counter)
-                cv2.imwrite(img_name, frame)
-                print("{} written!".format(img_name))
-                self.img_counter += 1
-        camera.release()
-        cv2.destroyAllWindows()
+        self.cam_pulse = 1400
+        self.cam_channel = 4
+        self.cam_max = 2000
+        self.cam_min = 1400
 
     # Gripper controls
     def on_square_press(self):
@@ -115,27 +92,35 @@ class MyController(Controller):
 
     # Event handlers for Camera
 
-    def on_R3_press(self):
-        print("R3 Pressed")
-        ret, frame = self.camera.read()
-        img_name = "opencv_frame_{}.jpg".format(self.img_counter)
-        self.img_counter += 1
-        cv2.imwrite(img_name, frame)
-        print("{} written!".format(img_name))
-        # if self.cameraOn:
-        #     self.cameraOn = False
-        #     print("Camera Off")
-        # else:
-        #     self.cameraOn = True
-        #     print("Camera On")
-        #     t1 = Thread(target=self.runCamera())
-        #     print("Statring Thread")
-        #     t1.start()
-            
+    def on_R3_up(self):
+        print("R3 Up")
+        print("Cam pulse at - " + str(self.cam_pulse))
+        if (self.cam_pulse < self.cam_max) :
+            for i in range(self.cam_pulse, self.cam_pulse + 200, 10):  
+                pwm.setServoPulse(self.cam_channel, i)   
+                sleep(0.02) 
+            print("Cam pulse being set at - " + str(self.cam_pulse))
+            self.cam_pulse = self.cam_pulse + 200 
 
-    def on_L3_press(self):
-        print("L3 Pressed")
-        # self.cameraClick = True
+    def on_R3_down(self):
+        print("R3 Down")
+        print("Cam pulse at - " + str(self.cam_pulse))
+        if (self.cam_pulse > self.cam_min) :
+            print("Cam pulse being set at - " + str(self.cam_pulse))
+            for i in range(self.cam_pulse, self.cam_pulse - 200, -10):  
+                pwm.setServoPulse(self.cam_channel, i)   
+                sleep(0.02) 
+            self.cam_pulse = self.cam_pulse - 200
+
+
+        if (self.cam_pulse <= self.cam_min + 100):
+            pwm.setPWM(self.cam_channel, 0, 4096)
+
+    def on_R3_x_at_rest(self):
+        print("on_R3_x_at_rest")
+
+    def on_R3_y_at_rest(self):
+        print("on_R3_y_at_rest")
 
     # Event handlers for chassis control
         #Down
@@ -244,6 +229,7 @@ if __name__ == "__main__":
     pwm.setPWMFreq(50)
     pwm.setPWM(0, 0, 4096)
     pwm.setPWM(2, 0, 4096)
+    pwm.setPWM(4, 0, 4096)
 
     controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
     controller.listen(timeout=6)
