@@ -36,8 +36,8 @@ class MyController(Controller):
             pwm.setServoPulse(self.gripper_channel, self.gripper_pulse) 
             sleep(0.02)
         
-    def on_square_release(self):
-        pwm.setPWM(self.gripper_channel, 0, 4096)
+    # def on_square_release(self):
+    #     pwm.setPWM(self.gripper_channel, 0, 4096)
 
     def on_circle_press(self):
         print("On Triangle Press")
@@ -46,7 +46,10 @@ class MyController(Controller):
             pwm.setServoPulse(self.gripper_channel, self.gripper_pulse) 
             sleep(0.02)
         
-    def on_circle_release(self):
+    # def on_circle_release(self):
+    #     pwm.setPWM(self.gripper_channel, 0, 4096)
+
+    def on_options_press(self):
         pwm.setPWM(self.gripper_channel, 0, 4096)
 
     # Bar Lift controls
