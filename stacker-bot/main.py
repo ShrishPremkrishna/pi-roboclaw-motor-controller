@@ -25,7 +25,7 @@ class MyController(Controller):
 
         self.cam_pulse = 1400
         self.cam_channel = 4
-        self.cam_max = 2000
+        self.cam_max = 2300
         self.cam_min = 1400
 
     # Gripper controls
