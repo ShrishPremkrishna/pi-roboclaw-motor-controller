@@ -92,8 +92,8 @@ class MyController(Controller):
 
     # Event handlers for Camera
 
-    def on_R3_up(self, arg):
-        print("R3 Up")
+    def on_R3_press(self, arg):
+        print("R3 Press")
         print("Cam pulse at - " + str(self.cam_pulse))
         if (self.cam_pulse < self.cam_max) :
             for i in range(self.cam_pulse, self.cam_pulse + 200, 10):  
@@ -102,8 +102,8 @@ class MyController(Controller):
             print("Cam pulse being set at - " + str(self.cam_pulse))
             self.cam_pulse = self.cam_pulse + 200 
 
-    def on_R3_down(self, arg):
-        print("R3 Down")
+    def on_L3_press(self, arg):
+        print("L3 Press")
         print("Cam pulse at - " + str(self.cam_pulse))
         if (self.cam_pulse > self.cam_min) :
             print("Cam pulse being set at - " + str(self.cam_pulse))
