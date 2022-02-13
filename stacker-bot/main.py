@@ -16,7 +16,7 @@ class MyController(Controller):
         self.gripper_pulse = 2000
         self.gripper_channel = 0
         self.gripper_max = 2000
-        self.gripper_min = 1300
+        self.gripper_min = 1200
 
         self.barlift_pulse = 600
         self.barlift_channel = 2
@@ -29,6 +29,7 @@ class MyController(Controller):
         self.cam_min = 1400
 
     # Gripper controls
+    # close
     def on_square_press(self):
         print("On X Press")
         if (self.gripper_pulse > self.gripper_min) :
