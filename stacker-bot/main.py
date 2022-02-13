@@ -96,21 +96,21 @@ class MyController(Controller):
         print("R3 Press")
         print("Cam pulse at - " + str(self.cam_pulse))
         if (self.cam_pulse < self.cam_max) :
-            for i in range(self.cam_pulse, self.cam_pulse + 200, 10):  
+            for i in range(self.cam_pulse, self.cam_pulse + 100, 10):  
                 pwm.setServoPulse(self.cam_channel, i)   
                 sleep(0.02) 
             print("Cam pulse being set at - " + str(self.cam_pulse))
-            self.cam_pulse = self.cam_pulse + 200 
+            self.cam_pulse = self.cam_pulse + 100 
 
     def on_L3_press(self):
         print("L3 Press")
         print("Cam pulse at - " + str(self.cam_pulse))
         if (self.cam_pulse > self.cam_min) :
             print("Cam pulse being set at - " + str(self.cam_pulse))
-            for i in range(self.cam_pulse, self.cam_pulse - 200, -10):  
+            for i in range(self.cam_pulse, self.cam_pulse - 100, -10):  
                 pwm.setServoPulse(self.cam_channel, i)   
                 sleep(0.02) 
-            self.cam_pulse = self.cam_pulse - 200
+            self.cam_pulse = self.cam_pulse - 100
 
 
         if (self.cam_pulse <= self.cam_min + 100):
