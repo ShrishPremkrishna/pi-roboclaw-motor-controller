@@ -92,7 +92,7 @@ class MyController(Controller):
 
     # Event handlers for Camera
 
-    def on_R3_up(self):
+    def on_R3_up(self, arg):
         print("R3 Up")
         print("Cam pulse at - " + str(self.cam_pulse))
         if (self.cam_pulse < self.cam_max) :
@@ -102,7 +102,7 @@ class MyController(Controller):
             print("Cam pulse being set at - " + str(self.cam_pulse))
             self.cam_pulse = self.cam_pulse + 200 
 
-    def on_R3_down(self):
+    def on_R3_down(self, arg):
         print("R3 Down")
         print("Cam pulse at - " + str(self.cam_pulse))
         if (self.cam_pulse > self.cam_min) :
@@ -115,12 +115,6 @@ class MyController(Controller):
 
         if (self.cam_pulse <= self.cam_min + 100):
             pwm.setPWM(self.cam_channel, 0, 4096)
-
-    def on_R3_x_at_rest(self):
-        print("on_R3_x_at_rest")
-
-    def on_R3_y_at_rest(self):
-        print("on_R3_y_at_rest")
 
     # Event handlers for chassis control
         #Down
