@@ -169,6 +169,7 @@ class MyController(Controller):
         roboclaw.BackwardM1(0x81,speed)
         roboclaw.ForwardM2(0x81,speed)
 
+    #RELEASES (stops motors)
     def on_L2_release(self):
         print("L2 y rest")
         roboclaw.ForwardM1(0x80,0)
