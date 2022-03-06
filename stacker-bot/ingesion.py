@@ -9,9 +9,9 @@ with open('image1.jpg', 'r') as file:
     res = requests.post(url='https://ingestion.edgeimpulse.com/api/training/data',
                         data=file,
                         headers={
-                            'Content-Type': 'application/cbor',
-                            'x-file-name': 'idle.01',
-                            'x-label': 'idle',
+                            'Content-Type': 'image/jpeg',
+                            'x-file-name': 'image1.jpg',
+                            'x-label': 'sample',
                             'x-api-key': API_KEY
                         })
 
