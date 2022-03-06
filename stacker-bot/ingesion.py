@@ -5,7 +5,7 @@ import requests
 import os
 
 API_KEY = os.environ.get('API_KEY')
-with open('image1.jpeg', 'r') as file:
+with open('image1.jpg', 'r') as file:
     res = requests.post(url='https://ingestion.edgeimpulse.com/api/training/data',
                         data=file,
                         headers={
