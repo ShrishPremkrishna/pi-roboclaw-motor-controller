@@ -1,7 +1,7 @@
 from urllib import request
 
 
-import request
+import requests
 import os
 
 API_KEY = os.environ.get('API_KEY')
